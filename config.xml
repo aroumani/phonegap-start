@@ -4,15 +4,15 @@
 	id		= "com.phonegap.getting.started"
 	version 	= "1.0.0">
 
-	<name>PhoneGap: Getting Started</name>
+	<name>Draco</name>
 
 	<description>
-		A template for getting started with PhoneGap development and build.phonegap.com
+		Draco, a friendly workout buddy!
 	</description>
 
-	<author href="http://alunny.github.com"
-		email="andrew.lunny@nitobi.com">
-		Andrew Lunny
+	<author href="http://workplaymobile.com"
+		email="support@workplaymobile.com">
+		Adib and Sam
 	</author>
 
 	<icon src="icon.png" gap:role="default" />
