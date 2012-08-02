@@ -8,5 +8,5 @@ function foodClick(){
 }
 
 function healthClick(){
-	window.location="selectWorkout.html";
+	window.location="chooseWorkout.html";
 }
