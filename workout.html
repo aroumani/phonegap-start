@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="css/workout.css" type="text/css" />
+		<script src="js/lib/jquery1.7.1.js"></script>
+		<script type="text/javascript" src="js/lib/progressNoAnim.js"></script>
+		<script type="text/javascript" src="js/workout.js"></script>
+		
+		<style type="text/css" media="screen"> 
+			body { 
+				margin:0; 
+				padding:0; 
+				height:100%; /* this is the key! */ 
+			} 
+		</style>
+		
+        <title>
+			Home
+        </title>
+    </head>
+    <body>
+		<div id="page-background"><img id="bgImg" src="images/workoutBG4.jpg" style="width:100%; height:100%;" alt="bg"></div>
+		<div id="content" style="height:100%;">
+			<div id="header" style="height:12%;">
+				<table style="background-color:black;" width="100%"><tr>
+					<td colspan="2" style="height:33%" align="center"><div id="timeRemain" align="center" style="margin-left:5px;color:white;font:Verdana;font-size:15px;">Time Left: caclulating...</div></td>
+					<td align="right" style="height:33%"><button onclick="window.location='index.html';" style="margin-right:5px;width:75%;background-color:white;color:black;font:Verdana;font-size:15px;">Exit Workout</button></td>
+				</tr></table>
+			</div>
+			
+			<div style="height:10%;" width="100%" id="health" align="center">
+				<table width="65%"><tr>
+					<td width="10%" align="center"><img  width="100%" src="images/watch.jpg"/></td>
+					<td  style="background-color:black;" width="90%"><div  class="my-time-progress-bar" data-bar-length="100"></div></td>
+				</tr></table>
+			</div>
+			
+			<div width="100%" style="height:62%;" id="draco" align="center">
+				<img  onclick="powerStep();" id="dracoImg" height="100%" src="images/dragoStationaryBlinking.gif"/>
+			</div>
+			
+			<div style="height:5%;" width="100%" id="food" align="center">
+				<table height="100%" width="65%"><tr>
+					<td width="10%" align="center"><img  width="100%" src="images/run.jpg"/></td>
+					<td style="background-color:red;" width="90%"><div  class="my-step-progress-bar" data-bar-length="0"></div></td>
+				</tr></table>
+			</div>
+			<!--<div width="100%" id="actions" align="center">
+				<table width="100%" align="center" style="width: 50%;"><tr>
+					<td width="45%" align="left"><button onclick="alert('Comming Soon..');" style="margin-right:10px;height:60px;width:100%;background-color:darkblue;color:white;font:Verdana;font-size:20px;">Start Workout</button></td>
+					<td width="3%"></td>
+					<td width="45%" align="right"><button onclick="alert('Comming Soon..');" style="margin-right:10px;height:60px;width:100%;background-color:darkblue;color:white;font:Verdana;font-size:20px;">Feed Draco</button></td>
+				</tr></table>
+			</div>-->
+		</div>
+    </body>
+</html>
