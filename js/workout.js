@@ -40,7 +40,7 @@ $(document).ready(function() {
 		secondsRemain=900;
 	}
 
-	/*timerID2 = window.setInterval(function(){
+	timerID2 = window.setInterval(function(){
 		currentImg++;
 		if (currentImg==3){
 			currentImg=0;
@@ -53,7 +53,7 @@ $(document).ready(function() {
 		}else if(currentImg==2){ //show 3rd image
 			$("#dracoImg").attr("src","images/hardRun.gif");
 		}
-	}, 5000);*/
+	}, 5000);
 	
 	timerID=window.setInterval(incrementTime, 1000);
 
@@ -64,12 +64,11 @@ $(document).ready(function() {
     //
 function onDeviceReady() {
 	
-	alert('hello');
 	try{
 		var string = device.name;
-		alert(string);
+		$("#stepRemain").html(string);
 	}catch(e){
-		alert(e);
+		$("#stepRemain").html(e);
 	}
 			
 	function onSuccess(acceleration) {
@@ -87,7 +86,7 @@ function onDeviceReady() {
 		}else{
 			dotProduct = dotProduct / (a * b);
 		}
-		if (dotProduct <= 0.906) {
+		if (dotProduct <= 0.98) {
 			if (!isSleeping) {
 				isSleeping = true;
 				
