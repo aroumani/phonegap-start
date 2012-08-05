@@ -40,7 +40,7 @@ $(document).ready(function() {
 		secondsRemain=900;
 	}
 
-	timerID2 = window.setInterval(function(){
+	/*timerID2 = window.setInterval(function(){
 		currentImg++;
 		if (currentImg==3){
 			currentImg=0;
@@ -53,7 +53,7 @@ $(document).ready(function() {
 		}else if(currentImg==2){ //show 3rd image
 			$("#dracoImg").attr("src","images/hardRun.gif");
 		}
-	}, 5000);
+	}, 5000);*/
 	
 	timerID=window.setInterval(incrementTime, 1000);
 
@@ -86,14 +86,14 @@ function onDeviceReady() {
 		}else{
 			dotProduct = dotProduct / (a * b);
 		}
-		if (dotProduct <= 0.98) {
+		if (dotProduct <= 0.95) {
 			if (!isSleeping) {
 				isSleeping = true;
 				
 				//sleep for 300 millis
 				setTimeout(function() {
 						isSleeping=false;
-				}, 100);
+				}, 200);
 				step();
 			}
 		}
@@ -107,7 +107,7 @@ function onDeviceReady() {
 		$("#stepRemain").html("Error watching Acceleration..");
 	};
 
-	var options = { frequency: 50 };
+	var options = { frequency: 90 };
 	
     var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
 }
