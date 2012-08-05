@@ -14,6 +14,12 @@ var pz=0;
 
 $(document).ready(function() {
 
+	if (window.DeviceMotionEvent) {
+		$("#stepRemain").html("Steps: <b><i>Supported.</i></b>");
+	}else{
+		$("#stepRemain").html("Steps: <b><i>Not Supported.</i></b>");
+	}
+	
 	$("#timeBar").progressbar({});
 	$("#timeBar").progressbar( "option", "value", 100);
 	
@@ -55,6 +61,7 @@ $(document).ready(function() {
 	
 	timerID=window.setInterval(incrementTime, 1000);
 
+	
 	window.addEventListener("devicemotion", function(event) {
 		
 		var xx = event.accelerationIncludingGravity.x;
@@ -65,9 +72,13 @@ $(document).ready(function() {
 		var dotProduct = (px * xx) + (py * yy) + (pz * zz);
 	    var a = Math.abs(Math.sqrt(px * px + py * py + pz * pz));
         var b = Math.abs(Math.sqrt(xx * xx + yy * yy + zz * zz));
-    
+		
 		dotProduct = dotProduct / (a * b);
-    
+		if (dotProduct==0){
+			1; //dont go to if statement.
+		}else{
+			dotProduct = dotProduct / (a * b);
+		}
 		if (dotProduct <= 0.82) {
 			if (!isSleeping) {
 				isSleeping = true;
@@ -75,7 +86,7 @@ $(document).ready(function() {
 				//sleep for 300 millis
 				setTimeout(function() {
 						isSleeping=false;
-				}, 100);
+				}, 300);
 				step();
 			}
 		}

@@ -1,8 +1,6 @@
 var currentImg=0;
 
 $(document).ready(function() {
-
-
 	
 	$("#healthBar").progressbar({});
 	$("#healthBar").progressbar( "option", "value", Number(localStorage.health));
