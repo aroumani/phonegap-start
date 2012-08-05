@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="css/home.css" type="text/css" />
 		<script src="js/lib/jquery1.7.1.js"></script>
 		<script type="text/javascript" src="js/topbar.js"></script>
-		<script type="text/javascript" src="js/chooseWorkout.js"></script>
+		<script src="js/store.js"></script>
 		
 		<style type="text/css" media="screen"> 
 			body { 
@@ -21,7 +21,7 @@
         </title>
     </head>
     <body>
-		<div id="page-background"><img src="images/gym.gif" style="width:100%; height:100%;" alt="bg"></div>
+		<div id="page-background"><img src="images/storeBG.jpg" style="width:100%; height:100%;" alt="bg"></div>
 		<div id="content" style="height:100%;">
 			<div id="header" style="height:25%;">
 				<table style="background-color:black;" width="100%"><tr>
@@ -30,7 +30,7 @@
 					<td align="right" style="height:33%"><button onclick="window.location='settings.html'" style="margin-right:5px;width:75%;background-color:white;color:black;font:Verdana;font-size:15px;">Settings</button></td>
 				</tr><tr>
 				<td colspan="3" align="center" width="100%" style="height:10%;color:white;font:Tahoma;font-size:20px;">
-						Select A Workout
+						Purchase Things For Pet
 				</td>
 				</tr></table>
 			</div>
@@ -38,15 +38,28 @@
 			
 			
 			<div align="center" width="100%" style="height:18%;">
-				<button onclick="startWorkout(1);" style="color:darkred;font:Verdana;font-size:18px;height:50%;width:70%">Easy</button>
+				<table style="align:center;" width="90%">
+					<tr>
+						<td align="center" width="50%"><button onclick="purchase(1);" style="color:darkred;font:Verdana;font-size:18px;height:50%;width:70%">Apple</button></td>
+						<td align="center" width="50%"><button onclick="purchase(2);" style="color:darkred;font:Verdana;font-size:18px;height:50%;width:70%">Chocolate Bar</button></td>
+					</tr>
+				</table>
 			</div>
-			
 			<div align="center" width="100%" style="height:18%;">
-				<button onclick="startWorkout(2);" style="color:darkred;font:Verdana;font-size:18px;height:50%;width:70%">Medium</button>
+				<table width="90%">
+					<tr>
+						<td align="center" width="50%"><button onclick="purchase(3);" style="color:darkred;font:Verdana;font-size:18px;height:50%;width:70%">Chicken</button></td>
+						<td align="center" width="50%"><button onclick="purchase(4);" style="color:darkred;font:Verdana;font-size:18px;height:50%;width:70%">Burger</button></td>
+					</tr>
+				</table>
 			</div>
-			
 			<div align="center" width="100%" style="height:18%;">
-				<button onclick="startWorkout(3);" style="color:darkred;font:Verdana;font-size:18px;height:50%;width:70%">Hard</button>
+				<table width="90%">
+					<tr>
+						<td align="center" width="50%"><button onclick="purchase(5);" style="color:darkred;font:Verdana;font-size:18px;height:50%;width:70%">Carrot</button></td>
+						<td align="center" width="50%"><button onclick="purchase(6);" style="color:darkred;font:Verdana;font-size:18px;height:50%;width:70%">Cheesecake</button></td>
+					</tr>
+				</table>
 			</div>
 			
 			<div align="center" width="100%" style="height:18%;">

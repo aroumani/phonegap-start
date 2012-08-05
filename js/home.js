@@ -1,8 +1,15 @@
 var currentImg=0;
 
 $(document).ready(function() {
-    $('.my-health-progress-bar').simpleProgressBar();
-	$('.my-food-progress-bar').simpleProgressBar();
+
+
+	
+	$("#healthBar").progressbar({});
+	$("#healthBar").progressbar( "option", "value", Number(localStorage.health));
+	
+	$("#hungerBar").progressbar({});
+	$("#hungerBar").progressbar( "option", "value", Number(localStorage.hunger));
+	
 	
 	window.setInterval(function(){
 		currentImg++;
@@ -19,7 +26,7 @@ $(document).ready(function() {
 });
 
 function foodClick(){
-	
+	window.location="store.html";
 }
 
 function healthClick(){

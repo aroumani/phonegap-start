@@ -6,10 +6,20 @@ var timerID=null;
 var timerID2=null;
 var currentImg=0;
 var diff="easy";
+var isSleeping=false;
 var shouldListen=true;
-var prevAx=null;
+var px=0;
+var py=0;
+var pz=0;
+
 $(document).ready(function() {
 
+	$("#timeBar").progressbar({});
+	$("#timeBar").progressbar( "option", "value", 100);
+	
+	$("#stepBar").progressbar({});
+	$("#stepBar").progressbar( "option", "value", 0);
+	
 	diff=getParameterByName("difficulty");
 	if (diff=="easy"){
 		$("#bgImg").attr("src","images/workoutBG2.jpg");
@@ -27,11 +37,7 @@ $(document).ready(function() {
 		totalSeconds=900;
 		secondsRemain=900;
 	}
-	
-	
-    $('.my-step-progress-bar').simpleProgressBar();
-	$('.my-time-progress-bar').simpleProgressBar();
-		
+
 	timerID2 = window.setInterval(function(){
 		currentImg++;
 		if (currentImg==3){
@@ -51,16 +57,33 @@ $(document).ready(function() {
 
 	window.addEventListener("devicemotion", function(event) {
 		
-		var ax = event.accelerationIncludingGravity.x;
-		var ay = event.accelerationIncludingGravity.y;
-		var az = event.accelerationIncludingGravity.z;
-		if (prevAx == null){
-			prevAx=ax;
-		}
+		var xx = event.accelerationIncludingGravity.x;
+		var yy = event.accelerationIncludingGravity.y;
+		var zz = event.accelerationIncludingGravity.z;
 		
-		if (Math.abs(prevAx-ax) > 0.1){
-			step();	
+		
+		var dotProduct = (px * xx) + (py * yy) + (pz * zz);
+	    var a = Math.abs(Math.sqrt(px * px + py * py + pz * pz));
+        var b = Math.abs(Math.sqrt(xx * xx + yy * yy + zz * zz));
+    
+		dotProduct = dotProduct / (a * b);
+    
+		if (dotProduct <= 0.82) {
+			if (!isSleeping) {
+				isSleeping = true;
+				
+				//sleep for 300 millis
+				setTimeout(function() {
+						isSleeping=false;
+				}, 100);
+				step();
+			}
 		}
+    
+		px = xx; 
+		py = yy; 
+		pz = zz;
+		
 	}, true);
 	
 });
@@ -75,6 +98,7 @@ function step(){
 	if (!shouldListen){
 		return;
 	}
+	$("#stepRemain").html("Steps: <b><i>" + stepsTaken + " of " + stepGoal + "</i></b>");
 	stepsTaken++;
 	if (stepsTaken>=stepGoal){
 		shouldListen=false;
@@ -83,9 +107,9 @@ function step(){
 	}
 	
 	var newStepProg=((stepGoal-stepsTaken)/stepGoal)*100;
-	$('.my-step-progress-bar').attr("data-bar-length", 100-newStepProg);
-	$('.my-step-progress-bar').html('');
-	$('.my-step-progress-bar').simpleProgressBar();
+	$("#stepBar").progressbar( "option", "value", 100-newStepProg);
+	
+	
 	
 }
 function incrementTime() { 
@@ -103,7 +127,7 @@ function incrementTime() {
 
     var timeStr = (LeadingZero(minutes) + ":" + LeadingZero(displaySeconds));
 	
-	$("#timeRemain").html("Time Left: <b><i>" + timeStr + "</i></b>");
+	$("#timeRemain").html("Time: <b><i>" + timeStr + "</i></b>");
 		
 	if (secondsRemain==0){
 		shouldListen=false;
@@ -122,9 +146,7 @@ function incrementTime() {
 		}
 	}else{
 		var newProg=((totalSeconds-secondsRemain)/totalSeconds)*100;
-		$('.my-time-progress-bar').attr("data-bar-length", 100-newProg);
-		$('.my-time-progress-bar').html('');
-		$('.my-time-progress-bar').simpleProgressBar();
+		$("#timeBar").progressbar( "option", "value", 100-newProg);
 	}
 }
 

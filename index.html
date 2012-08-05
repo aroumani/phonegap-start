@@ -5,8 +5,11 @@
 		<meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0">
 
 		<link rel="stylesheet" href="css/home.css" type="text/css" />
+		<link type="text/css" href="js/lib/ui/css/ui-lightness/jquery-ui-1.8.22.custom.css" rel="stylesheet" />
 		<script src="js/lib/jquery1.7.1.js"></script>
-		<script type="text/javascript" src="js/lib/progress.js"></script>
+		<script type="text/javascript" src="js/lib/ui/js/jquery-ui-1.8.22.custom.min.js"></script>
+		<script type="text/javascript" src="js/database.js"></script>
+		<script type="text/javascript" src="js/topbar.js"></script>
 		<script type="text/javascript" src="js/home.js"></script>
 		
 		<style type="text/css" media="screen"> 
@@ -24,28 +27,29 @@
     <body>
 		<div id="page-background"><img src="images/background-01.png" style="width:100%; height:100%;" alt="bg"></div>
 		<div id="content" style="height:100%;">
-			<div id="header" style="height:12%;">
+			<div id="h" style="height:13%;">
 				<table style="background-color:black;" width="100%"><tr>
 					<td  style="height:33%"><div id="days" style="margin-left:5px;color:white;font:Verdana;font-size:15px;">Day: 0 of 60</div></td>
 					<td style="height:33%" align="center"><div id="coins" align="center" style="margin-left:5px;color:white;font:Verdana;font-size:15px;"> Coins: 0</div></td>
-					<td align="right" style="height:33%"><button onclick="alert('Comming Soon..');" style="margin-right:5px;width:75%;background-color:white;color:black;font:Verdana;font-size:15px;">Settings</button></td>
+					<td align="right" style="height:33%"><button onclick="window.location='settings.html'" style="margin-right:5px;width:75%;background-color:white;color:black;font:Verdana;font-size:15px;">Settings</button></td>
 				</tr></table>
 			</div>
 			
-			<div onclick="healthClick();" style="height:10%;" width="100%" id="health" align="center">
+			<div onclick="healthClick();" style="height:8%;" width="100%" id="health" align="center">
 				<table width="65%"><tr>
 					<td width="10%" align="center"><img  width="100%" src="images/heart.png"/></td>
-					<td  style="background-color:black;" width="90%"><div  class="my-health-progress-bar" data-bar-length="69"></div></td>
+					<td width="90%"><div  id="healthBar"></div></td>
 				</tr></table>
 			</div>
 			
 			<div width="100%" style="height:62%;" id="draco" align="center">
 				<img  id="dracoImg" height="100%" src="images/dragoStationaryBlinking.gif"/>
 			</div>
-			<div onclick="foodClick()" style="height:5%;" width="100%" id="food" align="center">
-				<table height="100%" width="65%"><tr>
+			
+			<div onclick="foodClick();" style="height:8%;" width="100%" id="health" align="center">
+				<table width="65%"><tr>
 					<td width="10%" align="center"><img  width="100%" src="images/food.png"/></td>
-					<td style="background-color:red;" width="90%"><div  class="my-food-progress-bar" data-bar-length="34"></div></td>
+					<td width="90%"><div  id="hungerBar"></div></td>
 				</tr></table>
 			</div>
 			

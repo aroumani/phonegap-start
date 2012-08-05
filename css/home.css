@@ -5,30 +5,4 @@ html, body {height:100%; margin:0; padding:0;}
 /* Specify the position and layering for the content that needs to appear in front of the background image. Must have a higher z-index value than the background image. Also add some padding to compensate for removing the margin from the 'html' and 'body' tags. */
 #content {position:relative; z-index:1; padding:0px;}
 
-.my-health-progress-bar{
-    overflow: hidden;
-    height: 40px;               /* Set height of bar */
-    background: white;          /* Set background color or image */
-    width: 100%;               /* Set width of bar */
-}
-
-.my-health-progress-bar div{
-    float:left;
-    height:40px;   			/* For a horizontal bar, set fixed height, for vertical bar, set fixed width */
-    background:green;         /* Set background color or image of current bar */
-}
-
-.my-food-progress-bar{
-    overflow: hidden;
-    height: 40px;               /* Set height of bar */
-    background: white;          /* Set background color or image */
-    width: 100%;               /* Set width of bar */
-}
-
-.my-food-progress-bar div{
-    float:left;
-    height:40px;                /* For a horizontal bar, set fixed height, for vertical bar, set fixed width */
-    background:orange;         /* Set background color or image of current bar */
-}
-
 /* .my-progress-bar div is a great place to add css3 effects */

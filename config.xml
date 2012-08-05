@@ -2,12 +2,12 @@
 <widget xmlns		= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		= "com.workplaymobile.draco"
-	version   = "1.0.1">
+	version   = "1.0.2">
 
 	<name>Draco</name>
 
 	<description>
-		Draco, a friendly workout buddy!
+		Draco, your friendly workout buddy!
 	</description>
 
 	<author href="http://workplaymobile.com"
@@ -15,10 +15,22 @@
 		Adib and Sam
 	</author>
 
-	<icon src="icon.png" gap:role="default" />
+	<icon src="icon.png" width="57" height="57" />
+	<icon src="icon.png" gap:platform="ios" width="72" height="72" />
+	<icon src="icon.png" width="114" height="114" />
+	<icon src="icon.png" gap:platform="android" gap:density="ldpi" />
+	<icon src="icon.png" gap:platform="android" gap:density="mdpi" />
+	<icon src="icon.png" gap:platform="android" gap:density="hdpi" />
+	<icon src="icon.png" gap:platform="blackberry" />
+	<icon src="icon.png" gap:platform="blackberry" gap:state="hover"/>
+	<icon src="icon.png" gap:platform="winphone" />
+	<icon src="icon.png" gap:platform="winphone" gap:role="background" />
 
-	<feature name="http://api.phonegap.com/1.0/file"/>
-	<feature name="http://api.phonegap.com/1.0/notification"/>
+	<gap:splash src="splash.png" />
+	
+	<preference name="disable-cursor" value="true" />
+	
+	<access />
 
 	<preference name="orientation" value="portrait" />
 </widget>
