@@ -87,14 +87,14 @@ function onDeviceReady() {
 		}else{
 			dotProduct = dotProduct / (a * b);
 		}
-		if (dotProduct <= 0.82) {
+		if (dotProduct <= 0.906) {
 			if (!isSleeping) {
 				isSleeping = true;
 				
 				//sleep for 300 millis
 				setTimeout(function() {
 						isSleeping=false;
-				}, 300);
+				}, 100);
 				step();
 			}
 		}
@@ -108,7 +108,7 @@ function onDeviceReady() {
 		$("#stepRemain").html("Error watching Acceleration..");
 	};
 
-	var options = { frequency: 100 };
+	var options = { frequency: 50 };
 	
     var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
 }
