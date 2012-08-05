@@ -40,7 +40,7 @@ $(document).ready(function() {
 		secondsRemain=900;
 	}
 
-	timerID2 = window.setInterval(function(){
+	/*timerID2 = window.setInterval(function(){
 		currentImg++;
 		if (currentImg==3){
 			currentImg=0;
@@ -53,7 +53,7 @@ $(document).ready(function() {
 		}else if(currentImg==2){ //show 3rd image
 			$("#dracoImg").attr("src","images/hardRun.gif");
 		}
-	}, 5000);
+	}, 5000);*/
 	
 	timerID=window.setInterval(incrementTime, 1000);
 
@@ -64,6 +64,14 @@ $(document).ready(function() {
     //
 function onDeviceReady() {
 	
+	alert('hello');
+	try{
+		var string = device.name;
+		alert(string);
+	}catch(e){
+		alert(e);
+	}
+			
 	function onSuccess(acceleration) {
 		var xx = acceleration.x;
 		var yy = acceleration.y;
@@ -74,9 +82,8 @@ function onDeviceReady() {
 	    var a = Math.abs(Math.sqrt(px * px + py * py + pz * pz));
         var b = Math.abs(Math.sqrt(xx * xx + yy * yy + zz * zz));
 		
-		dotProduct = dotProduct / (a * b);
-		if (dotProduct==0){
-			1; //dont go to if statement.
+		if ((a * b)==0){
+			dotProduct=1; //dont go to if statement.
 		}else{
 			dotProduct = dotProduct / (a * b);
 		}
