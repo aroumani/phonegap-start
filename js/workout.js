@@ -14,12 +14,8 @@ var pz=0;
 
 $(document).ready(function() {
 
-	if (window.DeviceMotionEvent) {
-		$("#stepRemain").html("Steps: <b><i>Supported.</i></b>");
-	}else{
-		$("#stepRemain").html("Steps: <b><i>Not Supported.</i></b>");
-	}
-	
+	document.addEventListener("deviceready", onDeviceReady, false);
+
 	$("#timeBar").progressbar({});
 	$("#timeBar").progressbar( "option", "value", 100);
 	
@@ -62,11 +58,16 @@ $(document).ready(function() {
 	timerID=window.setInterval(incrementTime, 1000);
 
 	
-	window.addEventListener("devicemotion", function(event) {
-		
-		var xx = event.accelerationIncludingGravity.x;
-		var yy = event.accelerationIncludingGravity.y;
-		var zz = event.accelerationIncludingGravity.z;
+});
+
+// Cordova is ready
+    //
+function onDeviceReady() {
+	
+	function onSuccess(acceleration) {
+		var xx = acceleration.x;
+		var yy = acceleration.y;
+		var zz = acceleration.z;
 		
 		
 		var dotProduct = (px * xx) + (py * yy) + (pz * zz);
@@ -94,11 +95,17 @@ $(document).ready(function() {
 		px = xx; 
 		py = yy; 
 		pz = zz;
-		
-	}, true);
-	
-});
+	};
 
+	function onError() {
+		$("#stepRemain").html("Error watching Acceleration..");
+	};
+
+	var options = { frequency: 100 };
+	
+    var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+}
+	
 function powerStep(){
 	for (i=0; i<100; i++)
 	{
