@@ -1,7 +1,7 @@
 var stepGoal=500;
 var totalSeconds=300;
 var secondsRemain=300;
-var stepsTaken=0;
+var stepsTaken=1;
 var timerID=null;
 var timerID2=null;
 var currentImg=0;
@@ -65,8 +65,7 @@ $(document).ready(function() {
 function onDeviceReady() {
 	
 	try{
-		var string = device.name;
-		$("#stepRemain").html(string);
+		navigator.notification.vibrate(1000);
 	}catch(e){
 		$("#stepRemain").html(e);
 	}
@@ -86,14 +85,14 @@ function onDeviceReady() {
 		}else{
 			dotProduct = dotProduct / (a * b);
 		}
-		if (dotProduct <= 0.95) {
+		if (dotProduct <= Number(localStorage.sensitivityValue)) {
 			if (!isSleeping) {
 				isSleeping = true;
 				
 				//sleep for 300 millis
 				setTimeout(function() {
 						isSleeping=false;
-				}, 200);
+				}, Number(localStorage.sleepValue));
 				step();
 			}
 		}
@@ -107,17 +106,26 @@ function onDeviceReady() {
 		$("#stepRemain").html("Error watching Acceleration..");
 	};
 
-	var options = { frequency: 90 };
+	
+	var options = { frequency: Number(localStorage.pollValue) };
 	
     var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+	
+	// Register the event listener
+    document.addEventListener("backbutton", onBackKeyDown, false);
+}
+
+// Handle the back button
+function onBackKeyDown() {
 }
 	
 function powerStep(){
-	for (i=0; i<100; i++)
+	for (i=0; i<1000; i++)
 	{
 		step();
 	}
 }
+
 function step(){
 	if (!shouldListen){
 		return;
@@ -126,8 +134,7 @@ function step(){
 	stepsTaken++;
 	if (stepsTaken>=stepGoal){
 		shouldListen=false;
-		alert('Workout Success!');
-		window.location="index.html";
+		workoutComplete(true);
 	}
 	
 	var newStepProg=((stepGoal-stepsTaken)/stepGoal)*100;
@@ -136,6 +143,35 @@ function step(){
 	
 	
 }
+
+function workoutComplete(success){
+	navigator.notification.vibrate(1000);
+	var msg="You have successfulley completed your workout! ";
+	if (success==false){
+		msg="You have failed your workout!";
+	}
+	navigator.notification.confirm(
+        msg,  // message
+        function(button){
+			if (success){
+				if (diff=="easy"){
+					msg += "You have gained: 10 coins";
+					localStorage.money = localStorage.money+10;
+				}else if (diff=="med"){
+					msg += "You have gained: 20 coins";
+					localStorage.money = localStorage.money+20;
+				}else if (diff=="hard"){
+					msg += "You have gained: 40 coins";
+					localStorage.money = localStorage.money+40;
+				}
+			}
+			window.location="index.html";
+		},              // callback to invoke with index of button pressed
+        'Workout has ended.',            // title
+        'Proceede'          // buttonLabels
+    );
+}
+
 function incrementTime() { 
 
 	if (!shouldListen){
@@ -155,18 +191,15 @@ function incrementTime() {
 		
 	if (secondsRemain==0){
 		shouldListen=false;
-		alert('workout done!');
 		timerID=window.clearInterval(timerID);
 		timerID2=window.clearInterval(timerID2);
 		//perhaps want to make draco stop moving.
 		$("#dracoImg").attr("src","images/dragoStationaryBlinking.gif");
 		
 		if (stepsTaken>=stepGoal){
-			alert('Workout Success!');
-			window.location="index.html";
+			workoutComplete(true);
 		}else{
-			alert('Workout Failed!');
-			window.location="index.html";
+			workoutComplete(false);
 		}
 	}else{
 		var newProg=((totalSeconds-secondsRemain)/totalSeconds)*100;

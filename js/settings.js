@@ -1,11 +1,16 @@
 function resetGame(type){
 	//should probably warn the user:
+	localStorage.day=null;
 	localStorage.clear();
-	localStorage.day=1;
-	localStorage.money=0;
-	localStorage.health=100;
-	localStorage.hunger=50;
-	localStorage.totalDays=60;
 	alert('Game has been reset');
 	window.location="index.html";
 }
+
+$(function() {
+		$( "#sensitivitySlider" ).slider({ max: 100, min: 55, value: Number(localStorage.sensitivityValue)*100});
+		$( "#sensitivitySlider" ).slider({
+			change: function(event, ui) {
+				localStorage.sensitivityValue= $("#sensitivitySlider" ).slider ("value")/100;
+			}
+		});
+});
