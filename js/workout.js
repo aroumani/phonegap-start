@@ -156,13 +156,13 @@ function workoutComplete(success){
 			if (success){
 				if (diff=="easy"){
 					msg += "You have gained: 10 coins";
-					localStorage.money = localStorage.money+10;
+					localStorage.money = Number(localStorage.money)+10;
 				}else if (diff=="med"){
 					msg += "You have gained: 20 coins";
-					localStorage.money = localStorage.money+20;
+					localStorage.money = Number(localStorage.money)+20;
 				}else if (diff=="hard"){
 					msg += "You have gained: 40 coins";
-					localStorage.money = localStorage.money+40;
+					localStorage.money = Number(localStorage.money)+40;
 				}
 			}
 			window.location="index.html";

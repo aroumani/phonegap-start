@@ -1,7 +1,7 @@
 function resetGame(type){
 	//should probably warn the user:
-	localStorage.day=null;
 	localStorage.clear();
+	localStorage.day=0;
 	alert('Game has been reset');
 	window.location="index.html";
 }

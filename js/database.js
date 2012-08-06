@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	if(typeof(Storage)!=="undefined"){
 		var day = localStorage.day;
-		if (!day){
+		if (!day || day==0){
 			alert('Welcome to Draco...');
 			localStorage.day=1;
 			localStorage.money=0;
