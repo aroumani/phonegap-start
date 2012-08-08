@@ -1,5 +1,6 @@
-var currentImg=0;
-var fatHungry=new Array("images/new/UnhappyDracoLean.gif","images/new/HungryDraco2Lean.gif");
+var currentImg=1;
+var fatHungry=new Array("images/draco/FatDragoStanding.gif","images/draco/FatDragoThinkingRunning.gif",
+						"images/draco/FatHungryDraco1.gif","images/draco/FatHungryDraco2.gif");
 
 $(document).ready(function() {
 	
@@ -10,6 +11,9 @@ $(document).ready(function() {
 	$("#hungerBar").progressbar({});
 	$("#hungerBar").progressbar( "option", "value", Number(localStorage.hunger));
 	
+	
+	$("#dracoImg").attr("src",fatHungry[0]);
+	currentImg++;
 	
 	window.setInterval(function(){
 		if (currentImg==fatHungry.length){
