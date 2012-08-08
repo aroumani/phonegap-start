@@ -18,3 +18,4 @@ $(document).ready(function() {
 		alert('Opps! Serious error...your device does not support web storage...');
 	}
 });
+
