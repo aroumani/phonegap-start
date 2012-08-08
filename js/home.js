@@ -1,6 +1,11 @@
 var currentImg=1;
-var fatHungry=new Array("images/draco/FatDragoStanding.gif","images/draco/FatDragoThinkingRunning.gif",
-						"images/draco/FatHungryDraco1.gif","images/draco/FatHungryDraco2.gif");
+var fatHungry=new Array("images/draco/BabyDraco.gif","images/draco/HealthyDraco.gif",
+						"images/draco/HealthyHungryDraco3.gif","images/draco/HealhtyHungryDraco2.gif",
+						"images/draco/HealhtyHungryDraco1.gif","images/draco/FatDragoStanding.gif",
+						"images/draco/FatHungryDraco1.gif","images/draco/FatHungryDraco2.gif",
+						"images/draco/FatDragoThinkingRunning.gif",
+						"images/draco/ObeseDracoStanding.gif","images/draco/ObeseHungryDraco1.gif",
+						"images/draco/ObeseHungryDraco2.gif","images/draco/ObeseDragoThinkingRunning.gif");
 
 $(document).ready(function() {
 	
@@ -19,7 +24,7 @@ $(document).ready(function() {
 		if (currentImg==fatHungry.length){
 			currentImg=0;
 		}
-		
+
 		$("#dracoImg").attr("src",fatHungry[currentImg]);
 		currentImg++;
 	}, 5000);
