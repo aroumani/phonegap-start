@@ -1,4 +1,5 @@
 var currentImg=0;
+var fatHungry=new Array("images/new/UnhappyDracoLean.gif","images/new/HungryDraco2Lean.gif");
 
 $(document).ready(function() {
 	
@@ -11,16 +12,12 @@ $(document).ready(function() {
 	
 	
 	window.setInterval(function(){
-		currentImg++;
-		if (currentImg==2){
+		if (currentImg==fatHungry.length){
 			currentImg=0;
 		}
 		
-		if (currentImg==0){ //show first image
-			$("#dracoImg").attr("src","images/dragoStationaryBlinking.gif");
-		}else if(currentImg==1){ //show 2nd image
-			$("#dracoImg").attr("src","images/dragoStationaryTailMoving.gif");
-		}
+		$("#dracoImg").attr("src",fatHungry[currentImg]);
+		currentImg++;
 	}, 5000);
 });
 

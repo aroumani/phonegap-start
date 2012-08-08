@@ -25,19 +25,19 @@ $(document).ready(function() {
 	diff=getParameterByName("difficulty");
 	if (diff=="easy"){
 		$("#bgImg").attr("src","images/workoutBG2.jpg");
-		stepGoal=500;
-		totalSeconds=300;
-		secondsRemain=300;
-	}else if (diff=="med"){
-		$("#bgImg").attr("src","images/workoutBG3.jpg");
-		stepGoal=1200;
+		stepGoal=900;
 		totalSeconds=600;
 		secondsRemain=600;
-	}else if (diff=="hard"){
-		$("#bgImg").attr("src","images/workoutBG4.jpg");
-		stepGoal=2000;
+	}else if (diff=="med"){
+		$("#bgImg").attr("src","images/workoutBG3.jpg");
+		stepGoal=1800;
 		totalSeconds=900;
 		secondsRemain=900;
+	}else if (diff=="hard"){
+		$("#bgImg").attr("src","images/workoutBG4.jpg");
+		stepGoal=2800;
+		totalSeconds=1800;
+		secondsRemain=1800;
 	}
 
 	/*timerID2 = window.setInterval(function(){
@@ -155,14 +155,21 @@ function workoutComplete(success){
         function(button){
 			if (success){
 				if (diff=="easy"){
-					msg += "You have gained: 10 coins";
-					localStorage.money = Number(localStorage.money)+10;
+					msg += "You have gained: 3 coins and 11 HP";
+					localStorage.money = Number(localStorage.money)+3;
+					localStorage.health= Number(localStorage.health)+5;
 				}else if (diff=="med"){
-					msg += "You have gained: 20 coins";
-					localStorage.money = Number(localStorage.money)+20;
+					msg += "You have gained: 4 coins and 8 HP";
+					localStorage.money = Number(localStorage.money)+4;
+					localStorage.health= Number(localStorage.health)+8;
 				}else if (diff=="hard"){
-					msg += "You have gained: 40 coins";
-					localStorage.money = Number(localStorage.money)+40;
+					msg += "You have gained: 6 coins and 11 HP";
+					localStorage.money = Number(localStorage.money)+6;
+					localStorage.health= Number(localStorage.health)+11;
+				}
+				
+				if (Number(localStorage.health)>100){ //health is over 100
+					localStorage.health=100;
 				}
 			}
 			window.location="index.html";
