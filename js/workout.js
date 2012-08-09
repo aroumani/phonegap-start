@@ -14,8 +14,6 @@ var pz=0;
 
 $(document).ready(function() {
 
-	document.addEventListener("deviceready", onDeviceReady, false);
-
 	$("#timeBar").progressbar({});
 	$("#timeBar").progressbar( "option", "value", 100);
 	
@@ -60,13 +58,17 @@ $(document).ready(function() {
 	
 });
 
+function onload() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+}
 // Cordova is ready
     //
 function onDeviceReady() {
-	
+	alert('Device Rdy!');
 	try{
 		navigator.notification.vibrate(1000);
 	}catch(e){
+		alert(e);
 		$("#stepRemain").html(e);
 	}
 			

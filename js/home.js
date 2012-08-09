@@ -2,12 +2,12 @@ var currentImg=1;
 
 var playingClip=true;
 
-var obeseHungry=new Array("images/draco/ObeseDracoStanding.gif", "images/draco/ObeseHungryDraco1.gif", "images/draco/ObeseHungryDraco2.gif", "images/draco/ObeseDracoStanding.gif");
-var obeseNotHungry=new Array("images/draco/ObeseDracoStanding.gif", "images/draco/ObeseDracoStanding.gif")
-var fatHungry=new Array("images/draco/FatDragoThinkingRunning.gif", "images/draco/FatHungryDraco2.gif", "images/draco/FatDragoStanding.gif", "images/draco/FatHungryDraco1.gif");
-var fatNotHungry=new Array("images/draco/FatDragoStanding.gif", "images/draco/FatDragoThinkingRunning.gif");
-var fitHungry=new Array("images/draco/HealthyDraco.gif", "images/draco/HealhtyHungryDraco1.gif", "images/draco/HealhtyHungryDraco2.gif");
-var fitNotHungry=new Array("images/draco/HealthyDraco.gif");
+var obeseHungry=new Array("images/ObeseDracoStanding.gif", "images/ObeseHungryDraco1.gif", "images/ObeseHungryDraco2.gif", "images/ObeseDracoStanding.gif");
+var obeseNotHungry=new Array("images/ObeseDracoStanding.gif", "images/ObeseDracoStanding.gif")
+var fatHungry=new Array("images/FatDragoThinkingRunning.gif", "images/FatHungryDraco2.gif", "images/FatDragoStanding.gif", "images/FatHungryDraco1.gif");
+var fatNotHungry=new Array("images/FatDragoStanding.gif", "images/FatDragoThinkingRunning.gif");
+var fitHungry=new Array("images/HealthyDraco.gif", "images/HealhtyHungryDraco1.gif", "images/HealhtyHungryDraco2.gif");
+var fitNotHungry=new Array("images/HealthyDraco.gif");
 
 function loadDatabase(){
 	if(typeof(Storage)!=="undefined"){
@@ -24,6 +24,7 @@ function loadDatabase(){
 			localStorage.hunger=49;
 			localStorage.totalDays=60;
 			
+			navigator.notification.vibrate(100);
 			playBirth();
 			return true;
 		}
@@ -35,11 +36,11 @@ function loadDatabase(){
 
 function playBirth(){
 	playingClip=true;
-	$("#dracoImg").attr("src","images/draco/birth/eggWiggling.gif");
+	$("#dracoImg").attr("src","images/eggWiggling.gif");
 	setTimeout(function(){
-		$("#dracoImg").attr("src","images/draco/birth/eggWiggling2.gif");
+		$("#dracoImg").attr("src","images/eggWiggling2.gif");
 		setTimeout(function(){
-			$("#dracoImg").attr("src","images/draco/birth/dracoBirth.gif");
+			$("#dracoImg").attr("src","images/dracoBirth.gif");
 			setTimeout(function(){
 				loadUI();
 			}, 20000);
@@ -47,7 +48,7 @@ function playBirth(){
 	}, 5000);
 }
 
-$(document).ready(function() {
+document.addEventListener("deviceready", function(){
 	
 	var isBorn = loadDatabase();
 	
@@ -181,12 +182,25 @@ function checkHealthStatus(){
 
 function foodClick(){
 	if (!playingClip){
-		window.location="store.html";
+		var platform = device.platform;
+		if (platform != null && platform.toLowerCase().indexOf("androi") != -1){
+			navigator.app.loadUrl("store.html");
+		}else{
+			navigator.notification.vibrate(10);
+			window.location="store.html";
+		}
+		
 	}
 }
 
 function healthClick(){
 	if (!playingClip){
-		window.location="chooseWorkout.html";
+	var platform = device.platform;
+		if (platform != null && platform.toLowerCase().indexOf("androi") != -1){
+			navigator.notification.vibrate(10);
+			navigator.app.loadUrl("chooseWorkout.html");
+		}else{
+			window.location="chooseWorkout.html";
+		}
 	}
 }
