@@ -1,14 +1,57 @@
 var currentImg=1;
-var fatHungry=new Array("images/draco/BabyDraco.gif","images/draco/HealthyDraco.gif",
-						"images/draco/HealthyHungryDraco3.gif","images/draco/HealhtyHungryDraco2.gif",
-						"images/draco/HealhtyHungryDraco1.gif","images/draco/FatDragoStanding.gif",
-						"images/draco/FatHungryDraco1.gif","images/draco/FatHungryDraco2.gif",
-						"images/draco/FatDragoThinkingRunning.gif",
-						"images/draco/ObeseDracoStanding.gif","images/draco/ObeseHungryDraco1.gif",
-						"images/draco/ObeseHungryDraco2.gif","images/draco/ObeseDragoThinkingRunning.gif");
+
+var playingClip=true;
+
+var obeseHungry=new Array("images/draco/ObeseDracoStanding.gif", "images/draco/ObeseHungryDraco1.gif", "images/draco/ObeseHungryDraco2.gif", "images/draco/ObeseDracoStanding.gif");
+var obeseNotHungry=new Array("images/draco/ObeseDracoStanding.gif", "images/draco/ObeseDracoStanding.gif")
+var fatHungry=new Array("images/draco/FatDragoThinkingRunning.gif", "images/draco/FatHungryDraco2.gif", "images/draco/FatDragoStanding.gif", "images/draco/FatHungryDraco1.gif");
+var fatNotHungry=new Array("images/draco/FatDragoStanding.gif", "images/draco/FatDragoThinkingRunning.gif");
+var fitHungry=new Array("images/draco/HealthyDraco.gif", "images/draco/HealhtyHungryDraco1.gif", "images/draco/HealhtyHungryDraco2.gif");
+var fitNotHungry=new Array("images/draco/HealthyDraco.gif");
+
+function loadDatabase(){
+	if(typeof(Storage)!=="undefined"){
+		var day = localStorage.day;
+		if (!day || day==0){
+					
+			localStorage.day=1;
+			localStorage.money=0;
+			localStorage.debug="true";
+			localStorage.sleepValue="280";
+			localStorage.pollValue="50";
+			localStorage.sensitivityValue="0.86";
+			localStorage.health=100;
+			localStorage.hunger=49;
+			localStorage.totalDays=60;
+			
+			playBirth();
+			return true;
+		}
+	}else{
+		alert('Opps! Serious error...your device does not support web storage...');
+	}
+	return false;
+}
+
+function playBirth(){
+	playingClip=true;
+	$("#dracoImg").attr("src","images/draco/birth/eggWiggling.gif");
+	setTimeout(function(){
+		$("#dracoImg").attr("src","images/draco/birth/eggWiggling2.gif");
+		setTimeout(function(){
+			$("#dracoImg").attr("src","images/draco/birth/dracoBirth.gif");
+			setTimeout(function(){
+				loadUI();
+			}, 20000);
+		}, 5000);
+	}, 5000);
+}
 
 $(document).ready(function() {
 	
+	var isBorn = loadDatabase();
+	
+	checkHealthStatus();
 	
 	$("#healthBar").progressbar({});
 	$("#healthBar").progressbar( "option", "value", Number(localStorage.health));
@@ -16,22 +59,51 @@ $(document).ready(function() {
 	$("#hungerBar").progressbar({});
 	$("#hungerBar").progressbar( "option", "value", Number(localStorage.hunger));
 	
+	if (!isBorn){
+		loadUI();
+	}
+
 	
-	$("#dracoImg").attr("src",fatHungry[0]);
+	
+});
+
+function loadUI(){
+
+	var health = Number(localStorage.health);
+	var hunger = Number(localStorage.hunger);
+	
+	var arrToUse = fitNotHungry;
+	if (health < 33 && hunger<50){
+		arrToUse=obeseHungry;
+	}else if (health < 33){
+		arrToUse=obeseNotHungry;
+	}else if (health < 66 && hunger<50){
+		arrToUse=fatHungry;
+	}else if (health < 66){
+		arrToUse=fatNotHungry;
+	}else if (health >= 66 && hunger <50){
+		arrToUse=fitHungry;
+	}else{
+		arrToUse=fitNotHungry;
+	}
+	
+	$("#dracoImg").attr("src",arrToUse[0]);
 	currentImg++;
 	
 	window.setInterval(function(){
-		if (currentImg==fatHungry.length){
+		if (currentImg==arrToUse.length){
 			currentImg=0;
 		}
 
-		$("#dracoImg").attr("src",fatHungry[currentImg]);
+		$("#dracoImg").attr("src",arrToUse[currentImg]);
 		currentImg++;
 	}, 5000);
 	
-	checkHealthStatus();
+	playingClip=false;
 	
-});
+	$("#healthScore").html(health + "%");
+	$("#hungerScore").html(hunger + "%");
+}
 
 function checkHealthStatus(){
 	
@@ -104,13 +176,17 @@ function checkHealthStatus(){
 	localStorage.dayOfYear = dayOfYear;
 	localStorage.hour = hour;
 	localStorage.year = year;
-	
+
 }
 
 function foodClick(){
-	window.location="store.html";
+	if (!playingClip){
+		window.location="store.html";
+	}
 }
 
 function healthClick(){
-	window.location="chooseWorkout.html";
+	if (!playingClip){
+		window.location="chooseWorkout.html";
+	}
 }
