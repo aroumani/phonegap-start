@@ -44,11 +44,11 @@ function checkHealthStatus(){
 	var hour = today.getHours(); //Number of hours (0-23);
 	var year = Number(today.getFullYear()); //full year
 	
-	alert(localStorage.initDayOfYear);
 	if (!localStorage.initDayOfYear){
 		localStorage.initDayOfYear=dayOfYear;
 		localStorage.initYear=year;
 		localStorage.day=1;
+		
 	}else{
 		var initDayOfYear =  Number(localStorage.initDayOfYear);
 		var initYear = Number(localStorage.initYear);
