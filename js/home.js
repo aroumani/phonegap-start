@@ -49,11 +49,14 @@ function playBirth(){
 }
 
 function onPageLoad(){
+	alert('page load');
 	document.addEventListener("deviceready", phonegapReady, false);
+	alert('callbacks set');
 }
 
 function phonegapReady(){
 	
+	alert('device read');
 	var isBorn = loadDatabase();
 	
 	checkHealthStatus();
