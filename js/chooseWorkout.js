@@ -1,7 +1,10 @@
-document.addEventListener("deviceready", function(){
-	alert('device is readyy');
-});
+function onload() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+}
 
+function onDeviceReady(){
+	alert('device is readyy');
+}
 function startWorkout(type){
 	var platform="blackberry";
 	try{

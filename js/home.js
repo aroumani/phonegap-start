@@ -2,8 +2,8 @@ var currentImg=1;
 
 var playingClip=true;
 
-var obeseHungry=new Array("images/ObeseDracoStanding.gif", "images/ObeseHungryDraco1.gif", "images/ObeseHungryDraco2.gif", "images/ObeseDracoStanding.gif");
-var obeseNotHungry=new Array("images/ObeseDracoStanding.gif", "images/ObeseDracoStanding.gif")
+var obeseHungry=new Array("images/ObeseDracoStanding.gif", "images/ObeseHungryDraco1.gif", "images/ObeseHungryDraco2.gif", "images/ObeseDragoThinkingRunning.gif");
+var obeseNotHungry=new Array("images/ObeseDracoStanding.gif", "images/ObeseDragoThinkingRunning.gif")
 var fatHungry=new Array("images/FatDragoThinkingRunning.gif", "images/FatHungryDraco2.gif", "images/FatDragoStanding.gif", "images/FatHungryDraco1.gif");
 var fatNotHungry=new Array("images/FatDragoStanding.gif", "images/FatDragoThinkingRunning.gif");
 var fitHungry=new Array("images/HealthyDraco.gif", "images/HealhtyHungryDraco1.gif", "images/HealhtyHungryDraco2.gif");
@@ -48,7 +48,11 @@ function playBirth(){
 	}, 5000);
 }
 
-document.addEventListener("deviceready", function(){
+function onPageLoad(){
+	document.addEventListener("deviceready", phonegapReady, false);
+}
+
+function phonegapReady(){
 	
 	var isBorn = loadDatabase();
 	
@@ -63,10 +67,8 @@ document.addEventListener("deviceready", function(){
 	if (!isBorn){
 		loadUI();
 	}
-
 	
-	
-});
+};
 
 function loadUI(){
 

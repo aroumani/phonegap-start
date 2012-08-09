@@ -9,7 +9,6 @@
 		<script src="js/lib/jquery1.7.1.js"></script>
 		<script type="text/javascript" src="js/lib/ui/js/jquery-ui-1.8.22.custom.min.js"></script>
 		<script type="text/javascript" src="cordova.js"></script > 
-		<script type="text/javascript" src="js/database.js"></script>
 		<script type="text/javascript" src="js/home.js"></script>
 		
 		<style type="text/css" media="screen"> 
@@ -24,7 +23,7 @@
 			Home
         </title>
     </head>
-    <body>
+    <body onload="onPageLoad();">
 		<div id="page-background"><img id="backgrImg" src="images/background-01.png" style="width:100%; height:100%;" alt="bg"></div>
 		<div id="content" style="height:100%;">
 			<div id="h" style="height:13%;">
