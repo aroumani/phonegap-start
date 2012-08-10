@@ -29,7 +29,9 @@
 	<gap:splash src="splash.png" />
 	
 	<preference name="disable-cursor" value="true" />
-
+	
+	<preference name="fullscreen" value="true" />
+	
 	<preference name="orientation" value="portrait" />
 	
 	<access origin="*" />

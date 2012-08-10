@@ -52,7 +52,18 @@ function onPageLoad(){
 	document.addEventListener("deviceready", phonegapReady, false);
 }
 
+function onPause() {
+alert('Pausing application');
+}
+
+function onResume() {
+alert('Resuming Application');
+}
+
 function phonegapReady(){
+	document.addEventListener("resume", onResume, false);
+	document.addEventListener("pause", onPause, false);
+	document.addEventListener("backbutton", function(){}, false);
 	
 	var isBorn = loadDatabase();
 	
@@ -170,7 +181,7 @@ function checkHealthStatus(){
 		}
 		
 		
-		localStorage.health = Number(localStorage.health) - hoursPassed*2.4;
+		localStorage.health = Number(localStorage.health) - hoursPassed*2;
 		$("#healthBar").progressbar( "option", "value", Number(localStorage.health));
 		
 		
@@ -184,26 +195,14 @@ function checkHealthStatus(){
 
 function foodClick(){
 	if (!playingClip){
-		var platform = device.platform;
-		if (platform != null && platform.toLowerCase().indexOf("androi") != -1){
-			navigator.app.loadUrl("store.html");
-		}else{
-			navigator.notification.vibrate(10);
-			window.location="store.html";
-		}
-		
+		navigator.notification.vibrate(15);
+		window.location="store.html";
 	}
 }
 
 function healthClick(){
-	window.location="chooseWorkout.html";
-	/*if (!playingClip){
-		var platform = device.platform;
-		if (platform != null && platform.toLowerCase().indexOf("androi") != -1){
-			navigator.notification.vibrate(10);
-			navigator.app.loadUrl("chooseWorkout.html");
-		}else{
-			window.location="chooseWorkout.html";
-		}
-	}*/
+	if (!playingClip){
+		navigator.notification.vibrate(15);
+		window.location="chooseWorkout.html";
+	}
 }

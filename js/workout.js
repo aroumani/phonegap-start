@@ -40,16 +40,15 @@ function onload() {
 		secondsRemain=1800;
 	}
 	
-	document.addEventListener("deviceready", onDeviceReady, false);s
+	document.addEventListener("deviceready", onDeviceReady, false);
 }
 // Cordova is ready
     //
 function onDeviceReady() {
-	alert('Device Rdy!');
+
 	try{
-		navigator.notification.vibrate(1000);
+		navigator.notification.vibrate(1250);
 	}catch(e){
-		alert(e);
 		$("#stepRemain").html(e);
 	}
 			
@@ -128,37 +127,37 @@ function step(){
 }
 
 function workoutComplete(success){
-	navigator.notification.vibrate(1000);
-	var msg="You have successfulley completed your workout! ";
+	navigator.notification.vibrate(1250);
+	var msg="You have successfully completed your workout! ";
 	if (success==false){
-		msg="You have failed your workout!";
+		msg="Draco was unable to get the exercise he needed... No coins or HP gained.";
+	}else{
+		if (diff=="easy"){
+			msg += "You have gained: 3 coins and 11 HP";
+			localStorage.money = Number(localStorage.money)+3;
+			localStorage.health= Number(localStorage.health)+5;
+		}else if (diff=="med"){
+			msg += "You have gained: 4 coins and 8 HP";
+			localStorage.money = Number(localStorage.money)+4;
+			localStorage.health= Number(localStorage.health)+8;
+		}else if (diff=="hard"){
+			msg += "You have gained: 6 coins and 11 HP";
+			localStorage.money = Number(localStorage.money)+6;
+			localStorage.health= Number(localStorage.health)+11;
+		}
+		
+		if (Number(localStorage.health)>100){ //health is over 100
+			localStorage.health=100;
+		}
 	}
+
 	navigator.notification.confirm(
         msg,  // message
         function(button){
-			if (success){
-				if (diff=="easy"){
-					msg += "You have gained: 3 coins and 11 HP";
-					localStorage.money = Number(localStorage.money)+3;
-					localStorage.health= Number(localStorage.health)+5;
-				}else if (diff=="med"){
-					msg += "You have gained: 4 coins and 8 HP";
-					localStorage.money = Number(localStorage.money)+4;
-					localStorage.health= Number(localStorage.health)+8;
-				}else if (diff=="hard"){
-					msg += "You have gained: 6 coins and 11 HP";
-					localStorage.money = Number(localStorage.money)+6;
-					localStorage.health= Number(localStorage.health)+11;
-				}
-				
-				if (Number(localStorage.health)>100){ //health is over 100
-					localStorage.health=100;
-				}
-			}
 			window.location="index.html";
 		},              // callback to invoke with index of button pressed
-        'Workout has ended.',            // title
-        'Proceede'          // buttonLabels
+        'Workout Complete',            // title
+        'Proceed'          // buttonLabels
     );
 }
 

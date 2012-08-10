@@ -43,27 +43,20 @@
 			<div style="height:9%;" width="100%" id="health" align="center">
 				<table width="65%"><tr>
 					<td width="10%" align="center"><img  width="100%" src="images/watch.jpg"/></td>
-					<td width="90%"><div  id="timeBar"></div></td>
+					<td width="90%"><div  id="timeBar" onclick="workoutComplete(true);"></div></td>
 				</tr></table>
 			</div>
 			
 			<div width="100%" style="height:61%;" id="draco" align="center">
-				<img onclick="powerStep();" id="dracoImg" height="100%" src="images/draco.png"/>
+				<img id="dracoImg" height="100%" src="images/draco.png"/>
 			</div>
 			
 			<div style="height:4%;" width="100%" id="food" align="center">
 				<table width="65%"><tr>
 					<td width="10%" align="center"><img  width="100%" src="images/run.jpg"/></td>
-					<td width="90%"><div  id="stepBar"></div></td>
+					<td width="90%"><div onclick="workoutComplete(false);" id="stepBar"></div></td>
 				</tr></table>
 			</div>
-			<!--<div width="100%" id="actions" align="center">
-				<table width="100%" align="center" style="width: 50%;"><tr>
-					<td width="45%" align="left"><button onclick="alert('Comming Soon..');" style="margin-right:10px;height:60px;width:100%;background-color:darkblue;color:white;font:Verdana;font-size:20px;">Start Workout</button></td>
-					<td width="3%"></td>
-					<td width="45%" align="right"><button onclick="alert('Comming Soon..');" style="margin-right:10px;height:60px;width:100%;background-color:darkblue;color:white;font:Verdana;font-size:20px;">Feed Draco</button></td>
-				</tr></table>
-			</div>-->
 		</div>
     </body>
 </html>
