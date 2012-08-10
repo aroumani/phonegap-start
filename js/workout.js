@@ -12,8 +12,10 @@ var px=0;
 var py=0;
 var pz=0;
 
-$(document).ready(function() {
-
+function onload() {
+	
+	timerID=window.setInterval(incrementTime, 1000);
+	
 	$("#timeBar").progressbar({});
 	$("#timeBar").progressbar( "option", "value", 100);
 	
@@ -37,29 +39,8 @@ $(document).ready(function() {
 		totalSeconds=1800;
 		secondsRemain=1800;
 	}
-
-	/*timerID2 = window.setInterval(function(){
-		currentImg++;
-		if (currentImg==3){
-			currentImg=0;
-		}
-		
-		if (currentImg==0){ //show first image
-			$("#dracoImg").attr("src","images/easyRun.gif");
-		}else if(currentImg==1){ //show 2nd image
-			$("#dracoImg").attr("src","images/mediumRun.gif");
-		}else if(currentImg==2){ //show 3rd image
-			$("#dracoImg").attr("src","images/hardRun.gif");
-		}
-	}, 5000);*/
 	
-	timerID=window.setInterval(incrementTime, 1000);
-
-	
-});
-
-function onload() {
-        document.addEventListener("deviceready", onDeviceReady, false);
+	document.addEventListener("deviceready", onDeviceReady, false);s
 }
 // Cordova is ready
     //

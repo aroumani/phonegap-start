@@ -49,14 +49,11 @@ function playBirth(){
 }
 
 function onPageLoad(){
-	alert('page load');
 	document.addEventListener("deviceready", phonegapReady, false);
-	alert('callbacks set');
 }
 
 function phonegapReady(){
 	
-	alert('device read');
 	var isBorn = loadDatabase();
 	
 	checkHealthStatus();
@@ -199,13 +196,14 @@ function foodClick(){
 }
 
 function healthClick(){
-	if (!playingClip){
-	var platform = device.platform;
+	window.location="chooseWorkout.html";
+	/*if (!playingClip){
+		var platform = device.platform;
 		if (platform != null && platform.toLowerCase().indexOf("androi") != -1){
 			navigator.notification.vibrate(10);
 			navigator.app.loadUrl("chooseWorkout.html");
 		}else{
 			window.location="chooseWorkout.html";
 		}
-	}
+	}*/
 }

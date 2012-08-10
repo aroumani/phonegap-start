@@ -14,7 +14,8 @@ function startWorkout(type){
 	if (type==1){
 		if (platform != null && platform.toLowerCase().indexOf("androi") != -1){
 			navigator.notification.vibrate(10);
-			navigator.app.loadUrl("workout.html?difficulty=easy");
+			//navigator.app.loadUrl("workout.html?difficulty=easy");
+			window.location="workout.html?difficulty=easy";
 		}else{
 			window.location="workout.html?difficulty=easy";
 		}
