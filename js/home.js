@@ -72,8 +72,8 @@ function phonegapReady(){
 	$("#healthBar").progressbar({});
 	$("#healthBar").progressbar( "option", "value", Number(localStorage.health));
 	
-	$("#hungerBar").progressbar({});
-	$("#hungerBar").progressbar( "option", "value", Number(localStorage.hunger));
+	//$("#hungerBar").progressbar({});
+	//$("#hungerBar").progressbar( "option", "value", Number(localStorage.hunger));
 	
 	if (!isBorn){
 		loadUI();
