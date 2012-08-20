@@ -40,7 +40,7 @@ function playBirth(){
 	setTimeout(function(){
 		$("#dracoImg").attr("src","images/eggWiggling2.gif");
 		setTimeout(function(){
-			$("#dracoImg").attr("src","images/dracoBirth.gif");
+			$("#dracoImg").attr("src","images/dracoBirthWide.gif");
 			setTimeout(function(){
 				loadUI();
 			}, 20000);
@@ -121,7 +121,7 @@ function loadUI(){
 
 function checkHealthStatus(){
 	
-	$('#coins').html("Money: " + localStorage.money);
+	$('#coins').html("$: " + localStorage.money);
 	
 	var today = new Date();
 	var first = new Date(today.getFullYear(), 0, 1);
@@ -193,16 +193,40 @@ function checkHealthStatus(){
 
 }
 
-function foodClick(){
-	if (!playingClip){
-		navigator.notification.vibrate(15);
-		window.location="store.html";
-	}
-}
-
-function healthClick(){
+function workout(){
 	if (!playingClip){
 		navigator.notification.vibrate(15);
 		window.location="chooseWorkout.html";
 	}
+}
+
+function play(){
+	if (!playingClip){
+		navigator.notification.vibrate(15);
+		window.location="choosePlay.html";
+	}
+}
+
+function work(){
+	alert("I went to work and earned 10 Dollars! Tip: To maximize earnings, keep my HP as high as possible.");
+}
+function food(){
+	if (!playingClip){
+		//Add logic to figure out what popup should say
+		//Since money for this version is only used for food, just use as much as you need
+		//One serving is 5HP
+		try{
+			navigator.notification.vibrate(15);
+		}catch(e){}
+		if (true){
+			alert("Thanks, that cost you 5 dollars. I have gained 5HP! I'm still hungry...");
+			alert("Thanks, that cost you 5 dollars. I have gained 5HP!");
+		}else{
+			alert('That will cost you 5 dollars.');
+		}	
+	}
+}
+
+function clean(){
+	window.location="clean.html";
 }
