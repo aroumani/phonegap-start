@@ -12,7 +12,20 @@ var px=0;
 var py=0;
 var pz=0;
 
+var grass_x = 0;
+var clouds_x = 0;
+
+function ani_loop() {
+		grass_x = grass_x - 1;
+		clouds_x = clouds_x - .2;
+		document.getElementById('draco').style.backgroundPosition = grass_x+'px 0, '+clouds_x+'px 0';
+		t = setTimeout('ani_loop()',10);
+}
+	
 function onload() {
+	
+	
+	ani_loop();
 	
 	timerID=window.setInterval(incrementTime, 1000);
 	
@@ -39,6 +52,8 @@ function onload() {
 		totalSeconds=1800;
 		secondsRemain=1800;
 	}
+	
+	$("#dracoImg").attr("src","images/dracoWalk.gif");
 	
 	document.addEventListener("deviceready", onDeviceReady, false);
 }
