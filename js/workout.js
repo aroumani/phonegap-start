@@ -1,3 +1,5 @@
+//0.075 cals per step
+//110 steps / min
 var stepGoal=500;
 var totalSeconds=300;
 var secondsRemain=300;
