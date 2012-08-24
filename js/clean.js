@@ -1,9 +1,5 @@
-var stepGoal=500;
-var totalSeconds=300;
-var secondsRemain=300;
+var stepGoal=50;
 var stepsTaken=1;
-var timerID=null;
-var timerID2=null;
 var currentImg=0;
 var diff="easy";
 var isSleeping=false;
@@ -19,7 +15,7 @@ function onload() {
 	$("#stepBar").progressbar( "option", "value", 0);
 	
 	$("#bgImg").attr("src","images/workoutBG3.jpg");
-	stepGoal=50;
+	stepGoal=20;
 	totalSeconds=1000;
 	secondsRemain=1000;
 	
@@ -118,10 +114,11 @@ function workoutComplete(success){
 			msg="No HP gained.";
 		}else{
 			
-			localStorage.health= Number(localStorage.health)+4;
+			localStorage.clean= Number(localStorage.clean)-1;
+			localStorage.hp= Number(localStorage.hp)+2;
 			
-			if (Number(localStorage.health)>100){ //health is over 100
-				localStorage.health=100;
+			if (Number(localStorage.hp)>100){ //health is over 100
+				localStorage.hp=100;
 			}
 		}
 		
@@ -130,7 +127,7 @@ function workoutComplete(success){
 			function(button){
 				window.location="index.html";
 			},              // callback to invoke with index of button pressed
-			'Workout Complete',            // title
+			'Clean Complete',            // title
 			'Proceed'          // buttonLabels
 		);
 	}catch(e){

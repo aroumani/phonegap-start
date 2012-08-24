@@ -11,9 +11,9 @@ height:100%;
 }
 
 .draco-bg{
-   background-image: url(../images/grass1.png), url(../images/clouds1.png), url(../images/bluesky.png);
-   background-position: 100% 100%, 100% 100%, 100% 100%;
-   background-repeat: repeat-x, repeat-x, repeat-x;
+   #background-image: url(../images/grass1.png), url(../images/clouds1.png), url(../images/bluesky.png);
+   #background-position: 100% 100%, 100% 100%, 100% 100%;
+   #background-repeat: repeat-x, repeat-x, repeat-x;
 }
 /* Specify the position and layering for the content that needs to appear in front of the background image. Must have a higher z-index value than the background image. Also add some padding to compensate for removing the margin from the 'html' and 'body' tags. */
 #content {position:relative; z-index:1; padding:0px;}

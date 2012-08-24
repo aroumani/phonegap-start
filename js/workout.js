@@ -14,7 +14,7 @@ var px=0;
 var py=0;
 var pz=0;
 
-var grass_x = 0;
+/*var grass_x = 0;
 var clouds_x = 0;
 
 function ani_loop() {
@@ -22,12 +22,12 @@ function ani_loop() {
 		clouds_x = clouds_x - .2;
 		document.getElementById('draco').style.backgroundPosition = grass_x+'px 0, '+clouds_x+'px 0';
 		t = setTimeout('ani_loop()',10);
-}
+}*/
 	
 function onload() {
 	
 	
-	ani_loop();
+	//ani_loop();
 	
 	timerID=window.setInterval(incrementTime, 1000);
 	
@@ -40,14 +40,14 @@ function onload() {
 	diff=getParameterByName("difficulty");
 	if (diff=="easy"){
 		$("#bgImg").attr("src","images/workoutBG2.jpg");
-		stepGoal=900;
+		stepGoal=1100;
 		totalSeconds=600;
 		secondsRemain=600;
 	}else if (diff=="med"){
 		$("#bgImg").attr("src","images/workoutBG3.jpg");
-		stepGoal=1800;
-		totalSeconds=900;
-		secondsRemain=900;
+		stepGoal=2200;
+		totalSeconds=1200;
+		secondsRemain=1200;
 	}else if (diff=="hard"){
 		$("#bgImg").attr("src","images/workoutBG4.jpg");
 		stepGoal=2800;
@@ -129,7 +129,7 @@ function step(){
 	if (!shouldListen){
 		return;
 	}
-	$("#stepRemain").html("Steps: <b><i>" + stepsTaken + " of " + stepGoal + "</i></b>");
+	$("#stepRemain").html("<b><i>" + (stepGoal-stepsTaken) + " Remain</i></b>");
 	stepsTaken++;
 	if (stepsTaken>=stepGoal){
 		shouldListen=false;
@@ -149,24 +149,23 @@ function workoutComplete(success){
 		navigator.notification.vibrate(1250);
 		var msg="You have successfully completed your workout! ";
 		if (success==false){
-			msg="Draco was unable to get the exercise he needed... No coins or HP gained.";
+			msg="Draco was unable to get the exercise he needed... No HP gained.";
 		}else{
 			if (diff=="easy"){
-				msg += "You have gained: 3 coins and 11 HP";
-				localStorage.money = Number(localStorage.money)+3;
-				localStorage.health= Number(localStorage.health)+5;
+				localStorage.exercise= Number(localStorage.exercise)-1;
+				msg += "You have gained: 5 HP";
+				localStorage.hp= Number(localStorage.hp)+5;
 			}else if (diff=="med"){
-				msg += "You have gained: 4 coins and 8 HP";
-				localStorage.money = Number(localStorage.money)+4;
-				localStorage.health= Number(localStorage.health)+8;
+				localStorage.exercise= Number(localStorage.exercise)-2;
+				msg += "You have gained: 10 HP";
+				localStorage.hp= Number(localStorage.hp)+10;
 			}else if (diff=="hard"){
-				msg += "You have gained: 6 coins and 11 HP";
-				localStorage.money = Number(localStorage.money)+6;
-				localStorage.health= Number(localStorage.health)+11;
+				msg += "You have gained: 10 HP";
+				localStorage.hp= Number(localStorage.hp)+10;
 			}
 			
-			if (Number(localStorage.health)>100){ //health is over 100
-				localStorage.health=100;
+			if (Number(localStorage.hp)>100){ //health is over 100
+				localStorage.hp=100;
 			}
 		}
 		
@@ -179,7 +178,6 @@ function workoutComplete(success){
 			'Proceed'          // buttonLabels
 		);
 	}catch(e){
-		alert('test');
 		window.location="index.html";
 	}
 	
@@ -200,7 +198,7 @@ function incrementTime() {
 
     var timeStr = (LeadingZero(minutes) + ":" + LeadingZero(displaySeconds));
 	
-	$("#timeRemain").html("Time: <b><i>" + timeStr + "</i></b>");
+	$("#timeRemain").html("<b><i>" + timeStr + "</i></b>");
 		
 	if (secondsRemain==0){
 		shouldListen=false;
