@@ -2,12 +2,12 @@
 <widget xmlns		= "http://www.w3.org/ns/widgets"
 	xmlns:gap	= "http://phonegap.com/ns/1.0"
 	id		= "com.workplaymobile.draco"
-	version   = "1.0.4">
+	version   = "2.0.0">
 
 	<name>Draco</name>
 
 	<description>
-		Draco, a friendly workout buddy!
+		Draco, a friendly workout pet!
 	</description>
 
 	<author href="http://workplaymobile.com"
