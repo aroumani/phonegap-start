@@ -129,7 +129,7 @@ function step(){
 	if (!shouldListen){
 		return;
 	}
-	$("#stepRemain").html("<b><i>" + (stepGoal-stepsTaken) + " Remain</i></b>");
+	$("#stepRemain").html("<b><i>Steps Remaining:" + (stepGoal-stepsTaken) + "</i></b>");
 	stepsTaken++;
 	if (stepsTaken>=stepGoal){
 		shouldListen=false;

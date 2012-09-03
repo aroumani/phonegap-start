@@ -1,10 +1,19 @@
 function resetGame(type){
-	//should probably warn the user:
-	localStorage.day=0;
-	localStorage.clear();
-	alert('Game has been reset');
-	window.location="index.html";
+	apprise('Are you sure?', {'confirm':true}, function(r) {
+		if(r) { 
+			if(typeof(r)=='string'){
+			}else{ 
+				$('#returns').text('True'); 
+					localStorage.day=0;
+					localStorage.clear();
+					window.location="index.html";
+				}
+		}else{ 
+			$('#returns').text('False');
+		}
+	});
 }
+
 
 $(function() {
 		$( "#sensitivitySlider" ).slider({ max: 100, min: 55, value: Number(localStorage.sensitivityValue)*100});

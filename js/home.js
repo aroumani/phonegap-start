@@ -1,13 +1,22 @@
 var currentImg=1;
 
 var playingClip=true;
-
+var dracoClickIgnor=false;
 //var obeseHungry=new Array("images/ObeseDracoStanding.gif", "images/ObeseHungryDraco1.gif", "images/ObeseHungryDraco2.gif", "images/ObeseDragoThinkingRunning.gif");
 var obeseNotHungry=new Array("images/ObeseDracoStanding.gif", "images/ObeseDragoThinkingRunning.gif")
 //var fatHungry=new Array("images/FatDragoThinkingRunning.gif", "images/FatHungryDraco2.gif", "images/FatDragoStanding.gif", "images/FatHungryDraco1.gif");
 var fatNotHungry=new Array("images/FatDragoStanding.gif", "images/FatDragoThinkingRunning.gif");
 //var fitHungry=new Array("images/HealthyDraco.gif", "images/HealhtyHungryDraco1.gif", "images/HealhtyHungryDraco2.gif");
-var fitNotHungry=new Array("images/HealthyDraco.gif");
+var fitNotHungry=new Array("images/dragoStationaryTailMoving.gif", "images/dragoStationaryBlinking.gif");
+
+function dracoClicked(){
+	if(dracoClickIgnor){
+		return;
+	}
+	
+	
+}
+
 
 function loadDatabase(){
 	if(typeof(Storage)!=="undefined"){
@@ -59,6 +68,8 @@ function playBirth(){
 
 	
 	$("#healthSection").hide();
+	$('#healthSection').fadeIn('15000', function() {
+     });
 	$("#workoutButton").hide();
 	$("#foodButton").hide();
 	$("#playButton").hide();
@@ -83,11 +94,11 @@ function onPageLoad(){
 }
 
 function onPause() {
-alert('Pausing application');
+//alert('Pausing application');
 }
 
 function onResume() {
-alert('Resuming Application');
+//alert('Resuming Application');
 }
 
 function phonegapReady(){
