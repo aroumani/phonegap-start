@@ -146,6 +146,7 @@ function step(){
 function workoutComplete(success){
 
 	try{
+		shouldListen=false;
 		navigator.notification.vibrate(1250);
 		var msg="You have successfully completed your workout! ";
 		if (success==false){
@@ -177,7 +178,7 @@ function workoutComplete(success){
 			'Workout Complete',            // title
 			'Proceed'          // buttonLabels
 		);
-	}catch(e){
+	}catch(e){	
 		window.location="index.html";
 	}
 	

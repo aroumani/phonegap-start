@@ -19,7 +19,7 @@ function loadDatabase(){
 			localStorage.debug="true";
 			localStorage.sleepValue="280";
 			localStorage.pollValue="50";
-			localStorage.sensitivityValue="0.86";
+			localStorage.sensitivityValue="0.89";
 			localStorage.totalDays=60;
 			localStorage.hp=80;
 			
@@ -332,21 +332,15 @@ function workout(){
 
 function play(){
 	if (!playingClip){
-	
 		var play = Number(localStorage.play);
 		var hp = Number(localStorage.hp);
 		
 		if (play>=1){
-			localStorage.play= play-1;
-			localStorage.hp= hp+5;
-			alert("Thanks for playing with me!");
-			window.location="index.html";
+			navigator.notification.vibrate(15);
+			window.location="play.html";
 		}else{
 			alert("I dont feel like playing right now.");
 		}
-		
-		//navigator.notification.vibrate(15);
-		//window.location="choosePlay.html";
 	}
 }
 
@@ -360,7 +354,7 @@ function work(){
 		if (work>=1){
 			localStorage.work= work-1;
 			localStorage.money= money+ Math.round(10*hp);
-			alert("I went to work and earned 10 Dollars! Tip: To maximize earnings, keep my HP as high as possible.");
+			alert("I went to work and earned "+ (Math.round(10*hp)) +" Dollars! Tip: To maximize earnings, keep my HP as high as possible.");
 			window.location="index.html";
 		}else{
 			alert("I'm tired...I cant work any more today...");
@@ -417,6 +411,5 @@ function clean(){
 		alert("I'm already clean!");
 	}
 
-	window.location="index.html";
 	//window.location="clean.html";
 }
