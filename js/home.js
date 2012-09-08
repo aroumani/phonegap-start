@@ -1,7 +1,7 @@
 var currentImg=1;
 
 var playingClip=true;
-var dracoClickIgnor=false;
+var dracoClickIgnor=true;
 //var obeseHungry=new Array("images/ObeseDracoStanding.gif", "images/ObeseHungryDraco1.gif", "images/ObeseHungryDraco2.gif", "images/ObeseDragoThinkingRunning.gif");
 var obeseNotHungry=new Array("images/ObeseDracoStanding.gif", "images/ObeseDragoThinkingRunning.gif")
 //var fatHungry=new Array("images/FatDragoThinkingRunning.gif", "images/FatHungryDraco2.gif", "images/FatDragoStanding.gif", "images/FatHungryDraco1.gif");
@@ -9,11 +9,21 @@ var fatNotHungry=new Array("images/FatDragoStanding.gif", "images/FatDragoThinki
 //var fitHungry=new Array("images/HealthyDraco.gif", "images/HealhtyHungryDraco1.gif", "images/HealhtyHungryDraco2.gif");
 var fitNotHungry=new Array("images/dragoStationaryTailMoving.gif", "images/dragoStationaryBlinking.gif");
 
-function dracoClicked(){
+var thoughts=new Array("images/ballonWalks.png", "images/ballonSup.png", "images/ballonPetting.png", "images/ballonLikeYou.png", "images/ballonHi.png", "images/ballonHealth.png");
+
+function dracoClick(){
 	if(dracoClickIgnor){
 		return;
 	}
 	
+	dracoClickIgnor=true;
+	$("#thoughts").attr("src", thoughts[Math.floor(Math.random()*thoughts.length)]);
+	$("#thoughts").show();
+	setTimeout(function(){
+		dracoClickIgnor=false;
+		$("#thoughts").hide();
+		
+	}, 1200);
 	
 }
 
@@ -69,9 +79,10 @@ function playBirth(){
 	
 	$("#healthSection").hide();
 	$('#healthSection').fadeIn('15000', function() {
-     });
+	});
 	$("#workoutButton").hide();
 	$("#foodButton").hide();
+	$("#thoughts").hide();
 	$("#playButton").hide();
 	$("#cleanButton").hide();
 
@@ -83,10 +94,15 @@ function playBirth(){
 		setTimeout(function(){
 			$("#dracoImg").attr("src","images/dracoBirthWide.gif");
 			setTimeout(function(){
+				
 				loadUI();
 			}, 20000);
 		}, 5000);
 	}, 5000);
+}
+
+function tutorial(){
+	if (playingClip){return;}
 }
 
 function onPageLoad(){
@@ -228,6 +244,8 @@ function loadUI(){
 	$("#foodButton").show();
 	$("#playButton").show();
 	$("#cleanButton").show();
+	$("#thoughts").hide();
+	dracoClickIgnor=false;
 	
 	var health = Number(localStorage.hp);
 	
@@ -257,7 +275,7 @@ function loadUI(){
 	
 	$("#healthScore").html(health + "%");
 	
-	$('#coins').html("$:" + localStorage.money);
+	$('#coins').html("$" + localStorage.money);
 	
 	//set day in program
 	var today = new Date();
@@ -375,8 +393,8 @@ function work(){
 }
 function food(){
 	
-	if (!playingClip){
 	
+		if (playingClip){return;}
 		var money = Number(localStorage.money);
 		var food = Number(localStorage.food);
 		var hp = Number(localStorage.hp);
@@ -409,10 +427,9 @@ function food(){
 		
 		window.location="index.html";
 	}
-}
 
 function clean(){
-
+	if (playingClip){return;}
 	var clean = Number(localStorage.clean);
 	var hp = Number(localStorage.hp);
 		
@@ -424,3 +441,11 @@ function clean(){
 
 	//window.location="clean.html";
 }
+
+function settings(){
+	if (playingClip){return;}
+	window.location='settings.html';
+}
+
+
+
