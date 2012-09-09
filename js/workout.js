@@ -112,6 +112,7 @@ function onDeviceReady() {
 	
 	// Register the event listener
     document.addEventListener("backbutton", onBackKeyDown, false);
+    $("#stepRemain").html("<b><i>"+(stepGoal-stepsTaken) + " steps left</i></b>");
 }
 
 // Handle the back button
@@ -129,7 +130,7 @@ function step(){
 	if (!shouldListen){
 		return;
 	}
-	$("#stepRemain").html("<b><i>Steps Remaining:" + (stepGoal-stepsTaken) + "</i></b>");
+	$("#stepRemain").html("<b><i>"+(stepGoal-stepsTaken) + " steps left</i></b>");
 	stepsTaken++;
 	if (stepsTaken>=stepGoal){
 		shouldListen=false;
@@ -221,6 +222,20 @@ function incrementTime() {
 
 function LeadingZero(time) {
         return (time < 10) ? "0" + time : + time;
+}
+
+function playpause(){
+	shouldListen = !shouldListen;
+	if (shouldListen){
+		$("#pauseText").html("Pause");
+	}else{
+		$("#pauseText").html("Play");
+	}
+	
+}
+
+function stop(){
+	window.location='index.html';
 }
 
 function getParameterByName(name)

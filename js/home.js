@@ -23,7 +23,7 @@ function dracoClick(){
 		dracoClickIgnor=false;
 		$("#thoughts").hide();
 		
-	}, 1200);
+	}, 2750);
 	
 }
 
