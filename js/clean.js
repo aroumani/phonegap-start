@@ -99,6 +99,8 @@ function step(){
 	}
 	
 	var newStepProg=((stepGoal-stepsTaken)/stepGoal)*100;
+	$("#poopImg").attr("height",(newStepProg)+"%");
+	
 	$("#stepBar").progressbar( "option", "value", 100-newStepProg);
 	
 	

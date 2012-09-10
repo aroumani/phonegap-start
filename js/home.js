@@ -92,6 +92,11 @@ function playBirth(){
 	setTimeout(function(){
 		$("#dracoImg").attr("src","images/eggWiggling2.gif");
 		setTimeout(function(){
+			try{
+				var snd = new Audio("sounds/magic.ogg"); // buffers automatically when created
+				snd.play();
+			}catch(e){}
+			
 			$("#dracoImg").attr("src","images/dracoBirthWide.gif");
 			setTimeout(function(){
 				
@@ -238,6 +243,11 @@ function getDaysPassed(){
 }
 
 function loadUI(){
+
+	try{
+		var snd = new Audio("sounds/select.ogg"); // buffers automatically when created
+		snd.play();
+	}catch(e){}
 
 	$("#healthSection").show();
 	$("#workoutButton").show();
