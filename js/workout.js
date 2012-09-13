@@ -13,6 +13,7 @@ var shouldListen=true;
 var px=0;
 var py=0;
 var pz=0;
+var lock=false;
 
 /*var grass_x = 0;
 var clouds_x = 0;
@@ -25,10 +26,7 @@ function ani_loop() {
 }*/
 	
 function onload() {
-	
-	
-	//ani_loop();
-	
+
 	timerID=window.setInterval(incrementTime, 1000);
 	
 	$("#timeBar").progressbar({});
@@ -84,6 +82,7 @@ function onDeviceReady() {
 		}else{
 			dotProduct = dotProduct / (a * b);
 		}
+		
 		if (dotProduct <= Number(localStorage.sensitivityValue)) {
 			if (!isSleeping) {
 				isSleeping = true;
@@ -223,19 +222,68 @@ function incrementTime() {
 function LeadingZero(time) {
         return (time < 10) ? "0" + time : + time;
 }
-
+		
 function playpause(){
 	shouldListen = !shouldListen;
 	if (shouldListen){
-		$("#pauseText").html("Pause");
+		$("#playPauseIcon").attr("src","images/pause.png");
 	}else{
-		$("#pauseText").html("Play");
+		$("#playPauseIcon").attr("src","images/playIcon.png");
 	}
 	
 }
 
+function lockScreen(){
+	
+	lock=true;
+	$.blockUI({ 
+	    css: { top: '10px' } ,
+            message: "Hold for 3 Seconds To Unlock"
+	});
+	  
+        $('.blockOverlay').attr('title','Hold to unblock').mousedown(function() {
+		lock=true;
+		$('.blockUI').html('3');
+		setTimeout(function() {
+			if (!lock){return;}
+			$('.blockUI').html('2');
+			setTimeout(function() {
+				if (!lock){return;}
+				$('.blockUI').html('1');
+				setTimeout(function() {
+					if (!lock){return;}
+					$('.blockUI').html('0');
+					$.unblockUI();
+				}, 1000);
+			}, 1000);
+		}, 1000);
+		
+		
+	});
+	
+	$('.blockOverlay').attr('title','Hold to unblock').mouseup(function() {
+		$('.blockUI').html("Hold for 3 Seconds To Unlock");
+		lock=false;
+	});
+}
+
 function stop(){
-	window.location='index.html';
+	if (shouldListen){
+		playpause();
+	}
+	apprise('Are you sure (No HP will be earned)?', {'confirm':true}, function(r) {
+		if(r) { 
+			if(typeof(r)=='string'){
+			}else{ 
+				$('#returns').text('True'); 
+					localStorage.day=0;
+					localStorage.clear();
+					window.location="index.html";
+				}
+		}else{ 
+			$('#returns').text('False');
+		}
+	});
 }
 
 function getParameterByName(name)

@@ -1,7 +1,10 @@
 var currentImg=1;
-
+var tutorialImage=0;
 var playingClip=true;
+var playingTutorial=false;
 var dracoClickIgnor=true;
+
+var tutorialImages=new Array("images/tutorial1.gif", "images/tutorial2.gif", "images/tutorial3.gif", "images/tutorial4.gif", "images/tutorial5.gif");
 //var obeseHungry=new Array("images/ObeseDracoStanding.gif", "images/ObeseHungryDraco1.gif", "images/ObeseHungryDraco2.gif", "images/ObeseDragoThinkingRunning.gif");
 var obeseNotHungry=new Array("images/ObeseDracoStanding.gif", "images/ObeseDragoThinkingRunning.gif")
 //var fatHungry=new Array("images/FatDragoThinkingRunning.gif", "images/FatHungryDraco2.gif", "images/FatDragoStanding.gif", "images/FatHungryDraco1.gif");
@@ -87,11 +90,13 @@ function playBirth(){
 	$("#cleanButton").hide();
 
 	playingClip=true;
-	  
+	playingTutorial=false;
 	$("#dracoImg").attr("src","images/eggWiggling.gif");
 	setTimeout(function(){
+		navigator.notification.vibrate(10);
 		$("#dracoImg").attr("src","images/eggWiggling2.gif");
 		setTimeout(function(){
+			navigator.notification.vibrate(1000);
 			try{
 				var snd = new Audio("sounds/magic.ogg"); // buffers automatically when created
 				snd.play();
@@ -99,15 +104,98 @@ function playBirth(){
 			
 			$("#dracoImg").attr("src","images/dracoBirthWide.gif");
 			setTimeout(function(){
-				
-				loadUI();
+				playingTutorial=true;
+				tutorial();
 			}, 20000);
 		}, 5000);
 	}, 5000);
 }
 
+function deathScene(){
+	
+	localStorage.day=0;
+	localStorage.clear();
+	
+	$("#h").hide();
+	$("#healthSection").hide();
+	$("#workoutButton").hide();
+	$("#foodButton").hide();
+	$("#thoughts").hide();
+	$("#playButton").hide();
+	$("#cleanButton").hide();
+	$("#dracoImg").hide();
+	
+	$('#h').fadeOut('slow', function() {});
+	$('#healthSection').fadeOut('slow', function() {});
+	$('#workoutButton').fadeOut('slow', function() {});
+	$('#foodButton').fadeOut('slow', function() {});
+	$('#thoughts').fadeOut('slow', function() {});
+	$('#playButton').fadeOut('slow', function() {});
+	$('#cleanButton').fadeOut('slow', function() {});
+	$('#dracoImg').fadeOut('slow', function() {});
+	
+	setTimeout(function(){
+		$('#backgrImg').hide();
+		$("#backgrImg").attr("src", "images/dracoDeath.gif");
+		$('#backgrImg').fadeIn	('slow', function() {});
+		$("#content").click(function() {
+			window.location="index.html";
+		});
+	}, 500);
+	
+}
+
 function tutorial(){
-	if (playingClip){return;}
+	if (playingClip && !playingTutorial){return;}
+	
+	$("#h").hide();
+	$("#healthSection").hide();
+	$("#workoutButton").hide();
+	$("#foodButton").hide();
+	$("#thoughts").hide();
+	$("#playButton").hide();
+	$("#cleanButton").hide();
+	$("#dracoImg").hide();
+	
+	$('#h').fadeOut('slow', function() {});
+	$('#healthSection').fadeOut('slow', function() {});
+	$('#workoutButton').fadeOut('slow', function() {});
+	$('#foodButton').fadeOut('slow', function() {});
+	$('#thoughts').fadeOut('slow', function() {});
+	$('#playButton').fadeOut('slow', function() {});
+	$('#cleanButton').fadeOut('slow', function() {});
+	$('#dracoImg').fadeOut('slow', function() {});
+	
+	playingClip=true;
+	tutorialImage=0;
+	
+	setTimeout(function(){
+		$('#backgrImg').hide();
+		$("#backgrImg").attr("src", tutorialImages[tutorialImage]);
+		$('#backgrImg').fadeIn	('slow', function() {});
+		$("#content").click(function() {
+			nextTutorialSlide();
+		});
+	}, 500);
+	
+}
+
+function nextTutorialSlide(){
+	navigator.notification.vibrate(10);
+	tutorialImage++;
+	if (tutorialImage >= tutorialImages.length){
+		playingTutorial=false;
+		playingClip=false;
+		$("#content").unbind('click');
+		$('#backgrImg').hide();
+		$("#backgrImg").attr("src", "images/bg1.jpg");
+		$('#backgrImg').fadeIn	(1000, function() {});
+		loadUI();
+	}else{
+		$('#backgrImg').hide();
+		$("#backgrImg").attr("src", tutorialImages[tutorialImage]);
+		$('#backgrImg').fadeIn	('slow', function() {});
+	}
 }
 
 function onPageLoad(){
@@ -131,7 +219,7 @@ function phonegapReady(){
 	
 	//checkHealthStatus();
 	
-	updateHP();
+	isBorn = isBorn || updateHP();
 	
 	$("#healthBar").progressbar({});
 	$("#healthBar").progressbar( "option", "value", Number(localStorage.hp));
@@ -205,6 +293,8 @@ function updateHP(){
 		w=1;
 	}
 	
+	
+	
 	localStorage.year=year;
 	localStorage.dayOfYear=dayOfYear;
 	localStorage.hour=hour;
@@ -215,6 +305,12 @@ function updateHP(){
 	localStorage.clean=c;
 	localStorage.work=w;
 	
+	if (prevHP<=0){
+		deathScene();
+		return true;
+	}else{
+		return false;
+	}
 }
 
 function getDaysPassed(){
@@ -248,7 +344,9 @@ function loadUI(){
 		var snd = new Audio("sounds/select.ogg"); // buffers automatically when created
 		snd.play();
 	}catch(e){}
-
+	
+	$("#h").show();
+	$("#dracoImg").show();
 	$("#healthSection").show();
 	$("#workoutButton").show();
 	$("#foodButton").show();
