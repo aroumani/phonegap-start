@@ -254,7 +254,7 @@ function lockScreen(){
 	lock=true;
 	$.blockUI({ 
 	    css: { top: '10px' } ,
-            message: "Hold for 3 Seconds To Unlock"
+            message: "Hold unlock button for 3 Seconds To Unlock"
 	});
 	  
         $('.blockOverlay').attr('title','Hold to unblock').bind('touchstart',function(event){
