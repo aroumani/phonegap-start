@@ -67,7 +67,6 @@ function loadDatabase(){
 			localStorage.clean=1;
 			localStorage.work=1;
 			
-			navigator.notification.vibrate(100);
 			playBirth();
 			return true;
 		}
@@ -93,10 +92,10 @@ function playBirth(){
 	playingTutorial=false;
 	$("#dracoImg").attr("src","images/eggWiggling.gif");
 	setTimeout(function(){
-		navigator.notification.vibrate(10);
+		navigator.notification.vibrate(1000);
 		$("#dracoImg").attr("src","images/eggWiggling2.gif");
 		setTimeout(function(){
-			navigator.notification.vibrate(1000);
+			navigator.notification.vibrate(2000);
 			try{
 				var snd = new Audio("sounds/magic.ogg"); // buffers automatically when created
 				snd.play();
@@ -181,7 +180,6 @@ function tutorial(){
 }
 
 function nextTutorialSlide(){
-	navigator.notification.vibrate(10);
 	tutorialImage++;
 	if (tutorialImage >= tutorialImages.length){
 		playingTutorial=false;
@@ -459,10 +457,19 @@ function workout(){
 		var hp = Number(localStorage.hp);
 		
 		if (exercise>=1){
-			navigator.notification.vibrate(15);
 			window.location="chooseWorkout.html";
 		}else{
-			alert("I dont feel like running right now.");
+			apprise("Draco will not earn any HP for this workout, are you sure you want to continue?", {'confirm':true}, function(r) {
+				if(r) { 
+					if(typeof(r)=='string'){
+					}else{ 
+						$('#returns').text('True'); 
+							window.location="chooseWorkout.html";
+						}
+				}else{ 
+					$('#returns').text('False');
+				}
+			});
 		}
 	}
 }
@@ -473,10 +480,19 @@ function play(){
 		var hp = Number(localStorage.hp);
 		
 		if (play>=1){
-			navigator.notification.vibrate(15);
 			window.location="play.html";
 		}else{
-			alert("I dont feel like playing right now.");
+			apprise("Draco will not earn any HP for playing, are you sure you want to continue?", {'confirm':true}, function(r) {
+				if(r) { 
+					if(typeof(r)=='string'){
+					}else{ 
+						$('#returns').text('True'); 
+							window.location="play.html";
+						}
+				}else{ 
+					$('#returns').text('False');
+				}
+			});
 		}
 	}
 }
@@ -491,10 +507,23 @@ function work(){
 		if (work>=1){
 			localStorage.work= work-1;
 			localStorage.money= money+ Math.round(10*hp);
-			alert("I went to work and earned "+ (Math.round(10*hp)) +" Dollars! Tip: To maximize earnings, keep my HP as high as possible.");
-			window.location="index.html";
+			navigator.notification.confirm(
+				"I went to work and earned "+ (Math.round(10*hp)) +" Dollars! Tip: To maximize earnings, keep my HP as high as possible." ,  // message
+				function(button){
+					window.location="index.html";
+				},              // callback to invoke with index of button pressed
+				'No Money',            // title
+				'Proceed'          // buttonLabels
+			);
+			
 		}else{
-			alert("I'm tired...I cant work any more today...");
+			navigator.notification.confirm(
+				"I'm tired...I cant work any more today..." ,  // message
+				function(button){
+				},              // callback to invoke with index of button pressed
+				'No Money',            // title
+				'Proceed'          // buttonLabels
+			);
 		}
 		
 	}
@@ -513,7 +542,13 @@ function food(){
 			navigator.notification.vibrate(15);
 		}catch(e){}
 		if (food < 1){
-			alert("I'm Not Hungry!!");
+			navigator.notification.confirm(
+					"I'm Not Hungry!!" ,  // message
+					function(button){
+					},              // callback to invoke with index of button pressed
+					'Nope!',            // title
+					'Proceed'          // buttonLabels
+			);
 			return;
 		}
 		if (money >= 3){
@@ -524,16 +559,36 @@ function food(){
 			localStorage.hp= hp+3;
 			
 			if (food >= 1){
-				alert("Thanks, that cost you 3 dollars. I have gained 3HP! I'm still hungry...");
+				navigator.notification.confirm(
+					"Thanks, that cost you 3 dollars. I have gained 3HP! I'm still hungry..." ,  // message
+					function(button){
+						window.location="index.html";
+					},              // callback to invoke with index of button pressed
+					'Thanks',            // title
+					'Proceed'          // buttonLabels
+				);
 			}else{
-				alert("Thanks, that cost you 3 dollars. I have gained 3HP!");
+				navigator.notification.confirm(
+					"Thanks, that cost you 3 dollars. I have gained 3HP!" ,  // message
+					function(button){
+						window.location="index.html";
+					},              // callback to invoke with index of button pressed
+					'Thanks',            // title
+					'Proceed'          // buttonLabels
+				);
 			}
 			
 		}else{
-			alert('Not enough money! Work to earn some cash!');
+			navigator.notification.confirm(
+				'Not enough money! Work to earn some cash! (Briefcase on the top of the screen)' ,  // message
+				function(button){
+				},              // callback to invoke with index of button pressed
+				'No Money',            // title
+				'Proceed'          // buttonLabels
+			);
 		}	
 		
-		window.location="index.html";
+		
 	}
 
 function clean(){
@@ -544,7 +599,13 @@ function clean(){
 	if (clean>=1){
 		window.location="clean.html";
 	}else{
-		alert("I'm already clean!");
+		navigator.notification.confirm(
+			"I'm already clean!" ,  // message
+			function(button){
+			},              // callback to invoke with index of button pressed
+			'Clean',            // title
+			'Proceed'          // buttonLabels
+		);
 	}
 
 	//window.location="clean.html";

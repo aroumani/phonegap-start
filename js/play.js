@@ -98,10 +98,20 @@
         $("#scoreDiv").html("You scored " + score + " points").show();*/
 		var play = Number(localStorage.play);
 		var hp = Number(localStorage.hp);
-		localStorage.play= play-1;
-		localStorage.hp= hp+5;
-		alert("You scored " + score + " points. Thanks for playing with me!" );
-		window.location="index.html";
+		
+		if (play!=0){
+			localStorage.play= play-1;
+			localStorage.hp= hp+5;
+		}
+		
+		navigator.notification.confirm(
+			"You scored " + score + " points. Thanks for playing with me!" ,  // message
+			function(button){
+				window.location="index.html";
+			},              // callback to invoke with index of button pressed
+			'Play',            // title
+			'Proceed'          // buttonLabels
+		);
     }
     
     function accelerate()

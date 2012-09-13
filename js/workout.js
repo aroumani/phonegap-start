@@ -28,7 +28,8 @@ function ani_loop() {
 function onload() {
 
 	timerID=window.setInterval(incrementTime, 1000);
-	
+	$("#stepRemain").html("<b><i>"+(stepGoal-stepsTaken) + " steps left</i></b>");
+	$("#cals").html("<b><i>"+Math.round(0.067*stepsTaken) + "~Calories Burned</i></b>");
 	$("#timeBar").progressbar({});
 	$("#timeBar").progressbar( "option", "value", 100);
 	
@@ -36,21 +37,26 @@ function onload() {
 	$("#stepBar").progressbar( "option", "value", 0);
 	
 	diff=getParameterByName("difficulty");
-	if (diff=="easy"){
+	if (diff=="1"){
 		$("#bgImg").attr("src","images/workoutBG2.jpg");
+		stepGoal=900;
+		totalSeconds=600;
+		secondsRemain=600;
+	}else if (diff=="2"){
+		$("#bgImg").attr("src","images/workoutBG3.jpg");
 		stepGoal=1100;
 		totalSeconds=600;
 		secondsRemain=600;
-	}else if (diff=="med"){
-		$("#bgImg").attr("src","images/workoutBG3.jpg");
+	}else if (diff=="3"){
+		$("#bgImg").attr("src","images/workoutBG4.jpg");
 		stepGoal=2200;
 		totalSeconds=1200;
 		secondsRemain=1200;
-	}else if (diff=="hard"){
+	}else if (diff=="4"){
 		$("#bgImg").attr("src","images/workoutBG4.jpg");
-		stepGoal=2800;
-		totalSeconds=1800;
-		secondsRemain=1800;
+		stepGoal=2400;
+		totalSeconds=1200;
+		secondsRemain=1200;
 	}
 	
 	$("#dracoImg").attr("src","images/dracoWalk.gif");
@@ -112,7 +118,7 @@ function onDeviceReady() {
 	// Register the event listener
     document.addEventListener("backbutton", onBackKeyDown, false);
     $("#stepRemain").html("<b><i>"+(stepGoal-stepsTaken) + " steps left</i></b>");
-}
+ }  
 
 // Handle the back button
 function onBackKeyDown() {
@@ -139,6 +145,7 @@ function step(){
 	var newStepProg=((stepGoal-stepsTaken)/stepGoal)*100;
 	$("#stepBar").progressbar( "option", "value", 100-newStepProg);
 	
+	$("#cals").html("<b><i>"+Math.round(0.067*stepsTaken) + "~Calories Burned</i></b>");
 	
 	
 }
@@ -152,17 +159,26 @@ function workoutComplete(success){
 		if (success==false){
 			msg="Draco was unable to get the exercise he needed... No HP gained.";
 		}else{
-			if (diff=="easy"){
-				localStorage.exercise= Number(localStorage.exercise)-1;
-				msg += "You have gained: 5 HP";
-				localStorage.hp= Number(localStorage.hp)+5;
-			}else if (diff=="med"){
-				localStorage.exercise= Number(localStorage.exercise)-2;
-				msg += "You have gained: 10 HP";
-				localStorage.hp= Number(localStorage.hp)+10;
-			}else if (diff=="hard"){
-				msg += "You have gained: 10 HP";
-				localStorage.hp= Number(localStorage.hp)+10;
+			if (Number(localStorage.exercise)!=0){
+				if (diff=="1" || diff=="2"){
+					localStorage.exercise= Number(localStorage.exercise)-1;
+					msg += "You have gained: 5 HP";
+					localStorage.hp= Number(localStorage.hp)+5;
+				}else{
+					if (Number(localStorage.exercise)==1){
+						msg += "You have gained: 5 HP";
+						localStorage.hp= Number(localStorage.hp)+5;
+					}else{
+						msg += "You have gained: 10 HP";
+						localStorage.hp= Number(localStorage.hp)+10;
+					}
+					
+					localStorage.exercise= Number(localStorage.exercise)-2;
+				}
+			}
+			
+			if (Number(localStorage.exercise) < 0){
+				localStorage.exercise=0;
 			}
 			
 			if (Number(localStorage.hp)>100){ //health is over 100
@@ -241,7 +257,7 @@ function lockScreen(){
             message: "Hold for 3 Seconds To Unlock"
 	});
 	  
-        $('.blockOverlay').attr('title','Hold to unblock').mousedown(function() {
+        $('.blockOverlay').attr('title','Hold to unblock').bind('touchstart',function(event){
 		lock=true;
 		$('.blockUI').html('3');
 		setTimeout(function() {
@@ -261,7 +277,7 @@ function lockScreen(){
 		
 	});
 	
-	$('.blockOverlay').attr('title','Hold to unblock').mouseup(function() {
+	$('.blockOverlay').attr('title','Hold to unblock').bind('touchend',function(event){
 		$('.blockUI').html("Hold for 3 Seconds To Unlock");
 		lock=false;
 	});
@@ -276,8 +292,6 @@ function stop(){
 			if(typeof(r)=='string'){
 			}else{ 
 				$('#returns').text('True'); 
-					localStorage.day=0;
-					localStorage.clear();
 					window.location="index.html";
 				}
 		}else{ 
