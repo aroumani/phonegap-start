@@ -7,8 +7,10 @@
     var stopAnimation = true;
     var scoreStartTime, acceStartTime = 0;
 
+    var gameOver=false;
     function onload(){
-	
+		
+		gameOver=false;
 		$("#stepBar").progressbar({});
 		$("#stepBar").progressbar( "option", "value", 0);
 		
@@ -90,6 +92,7 @@
     
     function stopGame()
     {
+	gameOver=true;
         var timePlayed = (new Date()).getTime() - scoreStartTime;
         var score = new Number(timePlayed / (1000 * 2)).toFixed(0); 
         /*$("#startBtn").show();

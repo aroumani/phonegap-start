@@ -97,9 +97,11 @@ function playBirth(){
 		setTimeout(function(){
 			navigator.notification.vibrate(2000);
 			try{
-				var snd = new Audio("sounds/magic.ogg"); // buffers automatically when created
+				var snd = new Audio("sounds/testSound.mp3"); // buffers automatically when created
+				snd.load();
 				snd.play();
 			}catch(e){}
+
 			
 			$("#dracoImg").attr("src","images/dracoBirthWide.gif");
 			setTimeout(function(){
@@ -340,6 +342,7 @@ function loadUI(){
 
 	try{
 		var snd = new Audio("sounds/select.ogg"); // buffers automatically when created
+		snd.load();
 		snd.play();
 	}catch(e){}
 	
@@ -538,9 +541,6 @@ function food(){
 		//Add logic to figure out what popup should say
 		//Since money for this version is only used for food, just use as much as you need
 		//One serving is 5HP
-		try{
-			navigator.notification.vibrate(15);
-		}catch(e){}
 		if (food < 1){
 			navigator.notification.confirm(
 					"I'm Not Hungry!!" ,  // message
