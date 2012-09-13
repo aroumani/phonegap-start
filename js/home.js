@@ -15,6 +15,7 @@ var fitNotHungry=new Array("images/dragoStationaryTailMoving.gif", "images/drago
 var thoughts=new Array("images/ballonWalks.png", "images/ballonSup.png", "images/ballonPetting.png", "images/ballonLikeYou.png", "images/ballonHi.png", "images/ballonHealth.png");
 
 function dracoClick(){
+	
 	if(dracoClickIgnor){
 		return;
 	}
