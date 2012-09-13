@@ -92,6 +92,10 @@
     
     function stopGame()
     {
+	if (gameOver){
+		return;
+	}
+	
 	gameOver=true;
         var timePlayed = (new Date()).getTime() - scoreStartTime;
         var score = new Number(timePlayed / (1000 * 2)).toFixed(0); 
