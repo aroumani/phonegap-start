@@ -217,7 +217,6 @@ function phonegapReady(){
 	document.addEventListener("pause", onPause, false);
 	document.addEventListener("backbutton", function(){}, false);
 	
-	$("#content").css('visability', 'visible');
 	var isBorn = loadDatabase();
 	
 	//checkHealthStatus();
