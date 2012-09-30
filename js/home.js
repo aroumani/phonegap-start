@@ -12,7 +12,8 @@ var fatNotHungry=new Array("images/FatDragoStanding.gif", "images/FatDragoThinki
 //var fitHungry=new Array("images/HealthyDraco.gif", "images/HealhtyHungryDraco1.gif", "images/HealhtyHungryDraco2.gif");
 var fitNotHungry=new Array("images/dragoStationaryTailMoving.gif", "images/dragoStationaryBlinking.gif");
 
-var thoughts=new Array("images/ballonWalks.png", "images/ballonSup.png", "images/ballonPetting.png", "images/ballonLikeYou.png", "images/ballonHi.png", "images/ballonHealth.png");
+var thoughts=new Array("images/ballonBlank.png", "images/ballonHeart.png", "images/ballonPlay.png", "images/ballonWalks.png", "images/ballonSup.png", "images/ballonPetting.png", "images/ballonLikeYou.png", "images/ballonHi.png", "images/ballonHealth.png");
+
 
 function dracoClick(){
 	
@@ -232,6 +233,10 @@ function phonegapReady(){
 		loadUI();
 	}
 	
+	setTimeout(function(){
+		window.location="index.html";
+	}, 30000000);
+	
 };
 
 function updateHP(){
@@ -322,10 +327,9 @@ function getDaysPassed(){
 	var dayOfYear = Math.round(((today - first) / 1000 / 60 / 60 / 24) + .5, 0);
 	var hour = today.getHours(); //Number of hours (0-23);
 	var year = Number(today.getFullYear()); //full year
-	
-			
-	var startDay =  Number(localStorage.dayOfYear);
-	var startYear = Number(localStorage.year);
+				
+	var startDay =  Number(localStorage.startDay);
+	var startYear = Number(localStorage.startYear);
 	
 	var currnetDay=0;
 	
