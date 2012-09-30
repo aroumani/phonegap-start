@@ -190,7 +190,7 @@ function nextTutorialSlide(){
 		playingClip=false;
 		$("#content").unbind('click');
 		$('#backgrImg').hide();
-		$("#backgrImg").attr("src", "images/bg1.jpg");
+		$("#backgrImg").attr("src", "images/backgroundHome.png");
 		$('#backgrImg').fadeIn	(1000, function() {});
 		loadUI();
 	}else{
@@ -217,6 +217,7 @@ function phonegapReady(){
 	document.addEventListener("pause", onPause, false);
 	document.addEventListener("backbutton", function(){}, false);
 	
+	$("#content").css('visability', 'visible');
 	var isBorn = loadDatabase();
 	
 	//checkHealthStatus();
@@ -328,8 +329,8 @@ function getDaysPassed(){
 	var hour = today.getHours(); //Number of hours (0-23);
 	var year = Number(today.getFullYear()); //full year
 				
-	var startDay =  Number(localStorage.startDay);
-	var startYear = Number(localStorage.startYear);
+	var startDay =  Number(localStorage.dayOfYear);
+	var startYear = Number(localStorage.year);
 	
 	var currnetDay=0;
 	
